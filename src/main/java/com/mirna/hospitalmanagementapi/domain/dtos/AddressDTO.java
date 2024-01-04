@@ -3,6 +3,12 @@ package com.mirna.hospitalmanagementapi.domain.dtos;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 
+/**
+* Data transfer object used to transfer data that will be saved in a Address entity
+* 
+* @author Mirna Gama
+* @version 1.0
+*/
 public record AddressDTO(
 		
 		@NotBlank(message="street cannot be blank")
