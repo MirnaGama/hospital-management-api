@@ -33,6 +33,8 @@ public class DoctorServiceImpl implements DoctorService {
 	@Override
 	public Doctor addDoctor(DoctorDTO doctorDTO) {
 		Doctor doctor = new Doctor(doctorDTO);
+		
+		return addDoctor.execute(doctor);
 	}
 
 }
