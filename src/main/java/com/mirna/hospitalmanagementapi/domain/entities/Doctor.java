@@ -11,6 +11,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 /**
 * 
@@ -34,17 +36,29 @@ public class Doctor {
 		this.specialty=doctorDTO.specialty();
 		this.address = new Address(doctorDTO.address());
 	}
+	
+	public Doctor(){}
 
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
+	@NotBlank(message="name cannot be blank")
 	private String name;
+	
+	@NotBlank(message="email cannot be blank")
 	private String email;
+	
+	@NotBlank(message="crm cannot be blank")
 	private String crm;
+	
+	@NotBlank(message="telephone cannot be blank")
 	private String telephone;
 	
+	@NotNull(message="specialty cannot be null")
 	@Enumerated(EnumType.STRING)
 	private Specialty specialty;
 	
+	@NotNull(message="address cannot be null")
 	@Embedded
 	private Address address;
 
