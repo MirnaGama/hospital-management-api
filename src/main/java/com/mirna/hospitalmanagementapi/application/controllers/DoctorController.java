@@ -1,13 +1,17 @@
 package com.mirna.hospitalmanagementapi.application.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.mirna.hospitalmanagementapi.domain.dtos.DoctorDTO;
+import com.mirna.hospitalmanagementapi.domain.dtos.DoctorPublicDataDTO;
 import com.mirna.hospitalmanagementapi.domain.entities.Doctor;
 import com.mirna.hospitalmanagementapi.domain.services.DoctorService;
 
@@ -42,5 +46,20 @@ public class DoctorController {
 		
 		return ResponseEntity.ok(doctor);
 		
+	}
+	
+	/**
+	 * Get method to receive a list of objects containing data transfer objects with Doctor public information
+	 *
+	 * @param 
+	 * 
+	 * @return A response entity containing the list of doctors if successful
+	 */
+	@GetMapping
+	public ResponseEntity<Object> getDoctors() {
+		
+		List<DoctorPublicDataDTO> doctors = doctorService.findDoctors();
+		
+		return ResponseEntity.ok(doctors);
 	}
 }
