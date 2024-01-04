@@ -4,6 +4,7 @@ import com.mirna.hospitalmanagementapi.domain.dtos.AddressDTO;
 import com.mirna.hospitalmanagementapi.domain.dtos.DoctorDTO;
 
 import jakarta.persistence.Embeddable;
+import jakarta.validation.constraints.NotBlank;
 
 /**
 * 
@@ -32,12 +33,23 @@ public class Address {
 		this.houseNumber = addressDTO.houseNumber();
 	}
 	
+	@NotBlank(message="street cannot be blank")
 	private String street;
+	
+	@NotBlank(message="neighborhood cannot be blank")
 	private String neighborhood;
+	
+	@NotBlank(message="zipCode cannot be blank")
 	private String zipCode;
+	
+	@NotBlank(message="city cannot be blank")
 	private String city;
+	
+	@NotBlank(message="state cannot be blank")
 	private String state;
+	
 	private String additionalDetails;
+	
 	private String houseNumber;
 	
 	/**
