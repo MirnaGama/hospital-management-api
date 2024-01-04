@@ -9,7 +9,7 @@ Hospital Management API built in Spring Boot
 - Maven 4.0.0
 
 ### Features
-- [ ] R1 - Doctor Registration
+- [X] R1 - Doctor Registration
 - [ ] R2 - List of Doctors
 - [ ] R3 - Doctor Update
 - [ ] R4 - Doctor Exclusion
