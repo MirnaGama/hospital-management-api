@@ -52,5 +52,72 @@ POST - [**/api/v1.0/doctors**] - Adds a new doctor
 | `200` | _Successful operation_ |
 | `400` | _Validation Error_ |
 
+GET - [**/api/v1.0/doctors**] - Get a list of doctors
+
+- **Response Body Example:**
+```
+{
+    "content": [
+        {
+            "name": "Test1",
+            "email": "test1@gmail.com",
+            "crm": "123456",
+            "specialty": "ORTHOPEDICS"
+        },
+        {
+            "name": "Test2",
+            "email": "test2@gmail.com",
+            "crm": "789101",
+            "specialty": "ORTHOPEDICS"
+        },
+        {
+            "name": "Test3",
+            "email": "test3@gmail.com",
+            "crm": "112131",
+            "specialty": "ORTHOPEDICS"
+        },
+    ],
+    "pageable": {
+        "pageNumber": 0,
+        "pageSize": 10,
+        "sort": {
+            "sorted": true,
+            "unsorted": false,
+            "empty": false
+        },
+        "offset": 0,
+        "paged": true,
+        "unpaged": false
+    },
+    "totalPages": 1,
+    "totalElements": 3,
+    "last": true,
+    "sort": {
+        "sorted": true,
+        "unsorted": false,
+        "empty": false
+    },
+    "number": 0,
+    "size": 10,
+    "first": true,
+    "numberOfElements": 3,
+    "empty": false
+}
+```
+
+- **Request Parameters:**
+
+| Key  | Description |
+| ------------- | ------------- |
+| `size` | _Number of records that should be returned_ |
+| `sort` | _Sort by object attribute in descending order_ |
+| `page` | _Page number_ |
+
+- **Responses:**
+
+| Code  | Description |
+| ------------- | ------------- |
+| `200` | _Successful operation_ |
+
 
 
