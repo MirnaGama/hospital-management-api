@@ -21,7 +21,8 @@ public class Doctor {
 		this.email=doctorDTO.email();
 		this.crm=doctorDTO.email();
 		this.telephone=doctorDTO.telephone();
-		this.address = new Address(doctorDTO.addressDTO());
+		this.speciality=doctorDTO.speciality();
+		this.address = new Address(doctorDTO.address());
 	}
 
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
