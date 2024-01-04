@@ -1,6 +1,6 @@
 package com.mirna.hospitalmanagementapi.domain.dtos;
 
-import com.mirna.hospitalmanagementapi.domain.enums.Speciality;
+import com.mirna.hospitalmanagementapi.domain.enums.Specialty;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
@@ -32,7 +32,7 @@ public record DoctorDTO(
 		
 		@NotNull(message="speciality cannot be null")
 		@Valid
-		Speciality speciality, 
+		Specialty specialty, 
 		
 		@NotNull(message="address cannot be null")
 		@Valid
