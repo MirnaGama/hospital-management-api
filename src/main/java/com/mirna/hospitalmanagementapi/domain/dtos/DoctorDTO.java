@@ -8,6 +8,12 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 
+/**
+* Data transfer object used to transfer data that will be saved in a Doctor entity
+* 
+* @author Mirna Gama
+* @version 1.0
+*/
 public record DoctorDTO(
 		
 		@NotBlank(message="name cannot be blank")
