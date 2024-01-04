@@ -145,7 +145,7 @@ public class Doctor {
 	/**
 	  * Returns the specialty
 	 * @return An enum class representing the doctor's specialty.
-	 * @see Speciality
+	 * @see Specialty
 	 */
 	public Specialty getSpecialty() {
 		return specialty;
