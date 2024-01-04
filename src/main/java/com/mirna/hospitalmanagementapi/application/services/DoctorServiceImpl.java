@@ -1,12 +1,12 @@
 package com.mirna.hospitalmanagementapi.application.services;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.mirna.hospitalmanagementapi.application.usecase.doctor.AddDoctorUseCase;
-import com.mirna.hospitalmanagementapi.application.usecase.doctor.FindAllDoctorsUseCase;
+import com.mirna.hospitalmanagementapi.application.usecase.doctor.FindDoctorsUseCase;
 import com.mirna.hospitalmanagementapi.domain.dtos.DoctorDTO;
 import com.mirna.hospitalmanagementapi.domain.dtos.DoctorPublicDataDTO;
 import com.mirna.hospitalmanagementapi.domain.entities.Doctor;
@@ -28,7 +28,7 @@ public class DoctorServiceImpl implements DoctorService {
 	private AddDoctorUseCase addDoctor;
 	
 	@Autowired
-	private FindAllDoctorsUseCase findAllDoctors;
+	private FindDoctorsUseCase findDoctors;
 	
 	/**
 	 * Adds a new doctor to the database.
@@ -47,11 +47,13 @@ public class DoctorServiceImpl implements DoctorService {
 	/**
 	 * Finds doctors from the database.
 	 *
-	 * @return A paginated list containing data transfer objects with doctors public information in the repository
+	 * @param pageable Pagination information, such as size and page number
+	 * 
+	 * @return A paginated sublist containing data transfer objects with doctors public information in the repository
 	 */
 	@Override
-	public List<DoctorPublicDataDTO> findDoctors() {
-		return findAllDoctors.execute().stream().map(DoctorPublicDataDTO::new).toList();
+	public Page<DoctorPublicDataDTO> findDoctors(Pageable pageable) {
+		return findDoctors.execute(pageable).map(DoctorPublicDataDTO::new);
 	}
 
 }

@@ -3,6 +3,8 @@ package com.mirna.hospitalmanagementapi.application.usecase.doctor;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
 import com.mirna.hospitalmanagementapi.domain.entities.Doctor;
@@ -15,7 +17,7 @@ import com.mirna.hospitalmanagementapi.domain.repositories.DoctorRepository;
  * @version 1.0
  */
 @Component
-public class FindAllDoctorsUseCase {
+public class FindDoctorsUseCase {
 
 	@Autowired
 	private DoctorRepository doctorRepository;
@@ -23,10 +25,12 @@ public class FindAllDoctorsUseCase {
 	/**
 	 * Executes the findAll method from Doctor repository
 	 * 
-	 * @return The list of all stored doctors if successful, or null if there is an error
+	 * @param pageable Pagination information, such as size and page number
+	 * 
+	 * @return A paginated list with stored doctors if successful, or null if there is an error
 	 *
 	 */
-	public List<Doctor> execute() {
-        return this.doctorRepository.findAll();
+	public Page<Doctor> execute(Pageable pageable) {
+        return this.doctorRepository.findAll(pageable);
     }
 }

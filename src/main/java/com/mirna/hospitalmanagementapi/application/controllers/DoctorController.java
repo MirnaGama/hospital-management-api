@@ -3,6 +3,8 @@ package com.mirna.hospitalmanagementapi.application.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -49,16 +51,16 @@ public class DoctorController {
 	}
 	
 	/**
-	 * Get method to receive a list of objects containing data transfer objects with Doctor public information
+	 * Get method to receive a paginated sublist of objects containing data transfer objects with Doctor public information
 	 *
-	 * @param 
+	 * @param pageable Pagination information, such as size and page number
 	 * 
-	 * @return A response entity containing the list of doctors if successful
+	 * @return A response entity containing the paginated sublist of doctors if successful
 	 */
 	@GetMapping
-	public ResponseEntity<Object> getDoctors() {
+	public ResponseEntity<Object> getDoctors(Pageable pageable) {
 		
-		List<DoctorPublicDataDTO> doctors = doctorService.findDoctors();
+		Page<DoctorPublicDataDTO> doctors = doctorService.findDoctors(pageable);
 		
 		return ResponseEntity.ok(doctors);
 	}
