@@ -1,5 +1,7 @@
 package com.mirna.hospitalmanagementapi.unit.application.controllers;
 
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
@@ -16,7 +18,9 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mirna.hospitalmanagementapi.domain.dtos.AddressDTO;
 import com.mirna.hospitalmanagementapi.domain.dtos.DoctorDTO;
+import com.mirna.hospitalmanagementapi.domain.entities.Doctor;
 import com.mirna.hospitalmanagementapi.domain.enums.Specialty;
+import com.mirna.hospitalmanagementapi.domain.repositories.DoctorRepository;
 
 /**
  * 
@@ -35,6 +39,30 @@ public class DoctorControllerTest {
 	@Autowired
 	private ObjectMapper mapper;
 
+	@Autowired
+	private DoctorRepository doctorRepository;
+	
+	@BeforeAll
+	public void init() {
+		DoctorDTO doctorDTO1 = new DoctorDTO("test1", "test1@gmail.com", "123456", "99999999", Specialty.ORTHOPEDICS,
+				new AddressDTO("TEST STREET", "NEIGHBORHOOD", "12345678", "CITY", "ST", null, null));
+				
+		DoctorDTO doctorDTO2 = new DoctorDTO("test2", "test2@gmail.com", "789101", "99999999", Specialty.ORTHOPEDICS,
+				new AddressDTO("TEST STREET", "NEIGHBORHOOD", "12345678", "CITY", "ST", null, null));
+		
+		DoctorDTO doctorDTO3 = new DoctorDTO("test3", "test3@gmail.com", "112131", "99999999", Specialty.ORTHOPEDICS,
+				new AddressDTO("TEST STREET", "NEIGHBORHOOD", "12345678", "CITY", "ST", null, null));
+	
+		doctorRepository.save(new Doctor(doctorDTO1));
+		doctorRepository.save(new Doctor(doctorDTO2));
+		doctorRepository.save(new Doctor(doctorDTO3));
+	}
+	
+	@AfterAll
+	public void terminate() {
+		doctorRepository.deleteAll();
+	}
+	
 	/**
 	 * Post a valid doctor.
 	 */
@@ -67,5 +95,17 @@ public class DoctorControllerTest {
 		mockMvc.perform(MockMvcRequestBuilders.post("/api/v1.0/doctors").contentType(MediaType.APPLICATION_JSON)
 				.characterEncoding("UTF-8").content(doctorDTOContent))
 				.andExpect(MockMvcResultMatchers.status().isBadRequest()).andDo(MockMvcResultHandlers.print());
+	}
+	
+	/**
+	 * Get doctors with pagination
+	 */
+	@Test
+	@DisplayName("Should get doctors with pagination and return http status OK")
+	public void testGetDoctors() throws Exception {
+
+		mockMvc.perform(MockMvcRequestBuilders.get("/api/v1.0/doctors?size=3").contentType(MediaType.APPLICATION_JSON)
+				.characterEncoding("UTF-8"))
+				.andExpect(MockMvcResultMatchers.status().isOk()).andDo(MockMvcResultHandlers.print());
 	}
 }
