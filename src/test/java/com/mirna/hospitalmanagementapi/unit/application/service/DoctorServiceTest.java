@@ -9,6 +9,7 @@ import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 
 import com.mirna.hospitalmanagementapi.HospitalManagementApiApplication;
 import com.mirna.hospitalmanagementapi.application.services.DoctorServiceImpl;
@@ -26,6 +27,7 @@ import jakarta.validation.ConstraintViolationException;
  */
 @SpringBootTest(classes = HospitalManagementApiApplication.class)
 @TestInstance(Lifecycle.PER_CLASS)
+@ActiveProfiles("test")
 public class DoctorServiceTest {
 
 	@Autowired
