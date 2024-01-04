@@ -26,7 +26,15 @@ public class DoctorController {
 	@Autowired
 	private DoctorService doctorService;
 	
-	
+	/**
+	 * Post method to create a new Doctor object based on the provided DTO.
+	 *
+	 * @param doctorDTO The data transfer object containing data for Doctor
+	 * entity.
+	 * 
+	 * @return A response entity containing the saved doctor if successful, or
+	 * a 400-level error if there is a validation error
+	 */
 	@PostMapping
 	public ResponseEntity<Object> postDoctor(@RequestBody @Valid DoctorDTO doctorDTO) {
 		
