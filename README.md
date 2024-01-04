@@ -24,7 +24,7 @@ Hospital Management API built in Spring Boot
 
 ### /doctors
 
-POST - [**/api/v1.0/doctors**] - Adds a new doctor
+#### POST - [**/api/v1.0/doctors**] - Adds a new doctor
 
 - **Body:**
 ```
@@ -52,7 +52,7 @@ POST - [**/api/v1.0/doctors**] - Adds a new doctor
 | `200` | _Successful operation_ |
 | `400` | _Validation Error_ |
 
-GET - [**/api/v1.0/doctors**] - Get a list of doctors
+#### GET - [**/api/v1.0/doctors**] - Get a list of doctors
 
 - **Response Body Example:**
 ```
