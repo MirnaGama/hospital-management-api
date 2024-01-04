@@ -1,6 +1,9 @@
 package com.mirna.hospitalmanagementapi.domain.services;
 
+import java.util.List;
+
 import com.mirna.hospitalmanagementapi.domain.dtos.DoctorDTO;
+import com.mirna.hospitalmanagementapi.domain.dtos.DoctorPublicDataDTO;
 import com.mirna.hospitalmanagementapi.domain.entities.Doctor;
 
 /**
@@ -19,5 +22,12 @@ public interface DoctorService {
 	* @return The saved doctor if successful,  or null if there is an error.
 	*/
     public Doctor addDoctor(DoctorDTO doctorDTO);
+    
+    /**
+	 * Retrieves a list of doctors.
+	 * 
+	 * @return  A list containing data transfer objects with doctors public information in the repository
+	 */
+    public List<DoctorPublicDataDTO> findDoctors();
 
 }
