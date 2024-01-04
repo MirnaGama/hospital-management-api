@@ -1,4 +1,4 @@
-## Hospital Management - API Module
+## Hospital Management - API Module ![Build Status](https://github.com/MirnaGama/hospital-management-api/actions/workflows/maven.yml/badge.svg)
 Hospital Management API built in Spring Boot
 
 ### Prerequisites:
