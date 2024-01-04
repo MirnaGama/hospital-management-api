@@ -1,0 +1,10 @@
+com.mirna.hospitalmanagementapi
+com.mirna.hospitalmanagementapi.application.controllers
+com.mirna.hospitalmanagementapi.application.services
+com.mirna.hospitalmanagementapi.application.usecase.doctor
+com.mirna.hospitalmanagementapi.domain.dtos
+com.mirna.hospitalmanagementapi.domain.entities
+com.mirna.hospitalmanagementapi.domain.enums
+com.mirna.hospitalmanagementapi.domain.repositories
+com.mirna.hospitalmanagementapi.domain.services
+com.mirna.hospitalmanagementapi.infra.handlers.validation
