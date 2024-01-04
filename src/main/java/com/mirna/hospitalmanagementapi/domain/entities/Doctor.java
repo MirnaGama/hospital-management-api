@@ -1,7 +1,7 @@
 package com.mirna.hospitalmanagementapi.domain.entities;
 
 import com.mirna.hospitalmanagementapi.domain.dtos.DoctorDTO;
-import com.mirna.hospitalmanagementapi.domain.enums.Speciality;
+import com.mirna.hospitalmanagementapi.domain.enums.Specialty;
 
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
@@ -21,12 +21,17 @@ import jakarta.persistence.Table;
 @Entity(name="Doctor")
 public class Doctor {
 
+	/**
+	* Constructor for class Doctor
+	* @param doctorDTO  Data transfer object containing Doctor entity information
+	* @see DoctorDTO
+	*/
 	public Doctor(DoctorDTO doctorDTO) {
 		this.name=doctorDTO.name();
 		this.email=doctorDTO.email();
 		this.crm=doctorDTO.email();
 		this.telephone=doctorDTO.telephone();
-		this.speciality=doctorDTO.speciality();
+		this.specialty=doctorDTO.specialty();
 		this.address = new Address(doctorDTO.address());
 	}
 
@@ -38,7 +43,7 @@ public class Doctor {
 	private String telephone;
 	
 	@Enumerated(EnumType.STRING)
-	private Speciality speciality;
+	private Specialty specialty;
 	
 	@Embedded
 	private Address address;
@@ -101,7 +106,7 @@ public class Doctor {
 
 	/**
 	 * Sets the crm
-	 * @param crn Must not be blank.
+	 * @param crm Must not be blank.
 	 */
 	public void setCrm(String crm) {
 		this.crm = crm;
@@ -124,20 +129,20 @@ public class Doctor {
 	}
 
 	/**
-	  * Returns the speciality
-	 * @return An enum class representing the doctor's speciality.
+	  * Returns the specialty
+	 * @return An enum class representing the doctor's specialty.
 	 * @see Speciality
 	 */
-	public Speciality getSpeciality() {
-		return speciality;
+	public Specialty getSpecialty() {
+		return specialty;
 	}
 
 	/**
-	 * Sets the speciality
-	 * @param speciality Must not be null.
+	 * Sets the specialty
+	 * @param specialty Must not be null.
 	 */
-	public void setSpeciality(Speciality speciality) {
-		this.speciality = speciality;
+	public void setSpecialty(Specialty specialty) {
+		this.specialty = specialty;
 	}
 
 	/**
