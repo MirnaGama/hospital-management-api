@@ -1,6 +1,7 @@
 package com.mirna.hospitalmanagementapi.domain.entities;
 
 import com.mirna.hospitalmanagementapi.domain.dtos.AddressDTO;
+import com.mirna.hospitalmanagementapi.domain.dtos.DoctorDTO;
 
 import jakarta.persistence.Embeddable;
 
@@ -16,6 +17,11 @@ public class Address {
 		
 	}
 	
+	/**
+	* Constructor for class Address
+	* @param addressDTO  Data transfer object containing Address information
+	* @see AddressDTO
+	*/
 	public Address(AddressDTO addressDTO) {
 		this.street = addressDTO.street();
 		this.neighborhood = addressDTO.neighborhood();
