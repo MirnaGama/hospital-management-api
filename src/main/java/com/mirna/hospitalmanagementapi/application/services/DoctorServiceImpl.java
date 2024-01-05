@@ -5,10 +5,14 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import com.mirna.hospitalmanagementapi.application.usecase.doctor.AddDoctorUseCase;
+import com.mirna.hospitalmanagementapi.application.usecase.doctor.SaveDoctorUseCase;
+import com.mirna.hospitalmanagementapi.application.usecase.doctor.FindDoctorByIdUseCase;
 import com.mirna.hospitalmanagementapi.application.usecase.doctor.FindDoctorsUseCase;
+import com.mirna.hospitalmanagementapi.domain.dtos.AddressDTO;
 import com.mirna.hospitalmanagementapi.domain.dtos.DoctorDTO;
 import com.mirna.hospitalmanagementapi.domain.dtos.DoctorPublicDataDTO;
+import com.mirna.hospitalmanagementapi.domain.dtos.DoctorUpdatedDataDTO;
+import com.mirna.hospitalmanagementapi.domain.entities.Address;
 import com.mirna.hospitalmanagementapi.domain.entities.Doctor;
 import com.mirna.hospitalmanagementapi.domain.services.DoctorService;
 
@@ -25,10 +29,13 @@ import com.mirna.hospitalmanagementapi.domain.services.DoctorService;
 public class DoctorServiceImpl implements DoctorService {
 
 	@Autowired
-	private AddDoctorUseCase addDoctor;
+	private SaveDoctorUseCase saveDoctor;
 	
 	@Autowired
 	private FindDoctorsUseCase findDoctors;
+	
+	@Autowired
+	private FindDoctorByIdUseCase findDoctorById;
 	
 	/**
 	 * Adds a new doctor to the database.
@@ -41,7 +48,7 @@ public class DoctorServiceImpl implements DoctorService {
 	public Doctor addDoctor(DoctorDTO doctorDTO) {
 		Doctor doctor = new Doctor(doctorDTO);
 		
-		return addDoctor.execute(doctor);
+		return saveDoctor.execute(doctor);
 	}
 
 	/**
@@ -54,6 +61,70 @@ public class DoctorServiceImpl implements DoctorService {
 	@Override
 	public Page<DoctorPublicDataDTO> findDoctors(Pageable pageable) {
 		return findDoctors.execute(pageable).map(DoctorPublicDataDTO::new);
+	}
+
+	/**
+     * Updates an existing doctor record
+     * @param doctorUpdatedDataDTO Data transfer object containing the doctor updated data along with their corresponding id 
+	 *  
+	 * @return The updated doctor if successful,  or null if there is an error.
+	 */
+	@Override
+	public Doctor updateDoctor(DoctorUpdatedDataDTO doctorUpdatedDataDTO) {
+		Doctor doctor = findDoctorById.execute(doctorUpdatedDataDTO.id());
+		
+		if (doctor != null) {
+			
+		if (doctorUpdatedDataDTO.name() != null) {
+			doctor.setName(doctorUpdatedDataDTO.name());
+		}
+		
+		if (doctorUpdatedDataDTO.telephone() != null) {
+			doctor.setName(doctorUpdatedDataDTO.telephone());
+		}
+		
+		if (doctorUpdatedDataDTO.address() != null) {
+			
+			AddressDTO addressUpdatedDataDTO = doctorUpdatedDataDTO.address();
+			Address address = doctor.getAddress();
+			
+			if (addressUpdatedDataDTO.street() != null) {
+				address.setStreet(addressUpdatedDataDTO.street());
+			}
+			
+			if (addressUpdatedDataDTO.neighborhood() != null) {
+				address.setNeighborhood(addressUpdatedDataDTO.neighborhood());
+			}
+			
+			if (addressUpdatedDataDTO.city() != null) {
+				address.setCity(addressUpdatedDataDTO.city());
+			}
+			
+			if (addressUpdatedDataDTO.zipCode() != null) {
+				address.setZipCode(addressUpdatedDataDTO.zipCode());
+			}
+			
+			if (addressUpdatedDataDTO.state() != null) {
+				address.setState(addressUpdatedDataDTO.state());
+			}
+			
+			if (addressUpdatedDataDTO.additionalDetails() != null) {
+				address.setAdditionalDetails(addressUpdatedDataDTO.additionalDetails());
+			}
+			
+			if (addressUpdatedDataDTO.houseNumber() != null) {
+				address.setHouseNumber(addressUpdatedDataDTO.houseNumber());
+			}
+			
+			doctor.setAddress(address);
+		}
+		
+		doctor = saveDoctor.execute(doctor);
+		
+		}
+		
+		return doctor;
+		
 	}
 
 }
