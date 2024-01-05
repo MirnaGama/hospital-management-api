@@ -30,6 +30,7 @@ public class Doctor {
 	* @see DoctorDTO
 	*/
 	public Doctor(DoctorDTO doctorDTO) {
+		this.active=true;
 		this.name=doctorDTO.name();
 		this.email=doctorDTO.email();
 		this.crm=doctorDTO.crm();
@@ -62,6 +63,10 @@ public class Doctor {
 	@NotNull(message="specialty cannot be null")
 	@Enumerated(EnumType.STRING)
 	private Specialty specialty;
+
+	@NotNull(message="active cannot be null")
+	@Column(name="active")
+	private Boolean active;
 	
 	@NotNull(message="address cannot be null")
 	@Embedded
@@ -162,6 +167,22 @@ public class Doctor {
 	 */
 	public void setSpecialty(Specialty specialty) {
 		this.specialty = specialty;
+	}
+
+	/**
+	  * Returns the active
+	 * @return A boolean value that states whether the doctor is active in the system
+	 */
+	public Boolean getActive() {
+		return active;
+	}
+
+	/**
+	 * Sets the active
+	 * @param active Must not be null. Starts with the true value by default
+	 */
+	public void setActive(Boolean active) {
+		this.active = active;
 	}
 
 	/**
