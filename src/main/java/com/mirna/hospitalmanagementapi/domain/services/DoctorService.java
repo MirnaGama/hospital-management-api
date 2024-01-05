@@ -7,6 +7,7 @@ import org.springframework.data.domain.Pageable;
 
 import com.mirna.hospitalmanagementapi.domain.dtos.DoctorDTO;
 import com.mirna.hospitalmanagementapi.domain.dtos.DoctorPublicDataDTO;
+import com.mirna.hospitalmanagementapi.domain.dtos.DoctorUpdatedDataDTO;
 import com.mirna.hospitalmanagementapi.domain.entities.Doctor;
 
 /**
@@ -34,5 +35,12 @@ public interface DoctorService {
 	 * @return A paginated sublist containing data transfer objects with doctors public information in the repository
 	 */
     public Page<DoctorPublicDataDTO> findDoctors(Pageable pageable);
-
+    
+    /**
+     * Updates an existing doctor record
+     * @param doctorUpdatedDataDTO Data transfer object containing the doctor updated data along with their corresponding id 
+	 *  
+	 * @return The updated doctor if successful,  or null if there is an error.
+	 */
+    public Doctor updateDoctor(DoctorUpdatedDataDTO doctorUpdatedDataDTO);
 }
