@@ -23,6 +23,7 @@ import com.mirna.hospitalmanagementapi.application.services.DoctorServiceImpl;
 import com.mirna.hospitalmanagementapi.domain.dtos.AddressDTO;
 import com.mirna.hospitalmanagementapi.domain.dtos.DoctorDTO;
 import com.mirna.hospitalmanagementapi.domain.dtos.DoctorPublicDataDTO;
+import com.mirna.hospitalmanagementapi.domain.dtos.DoctorUpdatedDataDTO;
 import com.mirna.hospitalmanagementapi.domain.entities.Doctor;
 import com.mirna.hospitalmanagementapi.domain.enums.Specialty;
 import com.mirna.hospitalmanagementapi.domain.repositories.DoctorRepository;
@@ -45,6 +46,8 @@ public class DoctorServiceTest {
 	@Autowired
 	private DoctorRepository doctorRepository;
 	
+	private Doctor testDoctor;
+	
 	@BeforeAll
 	public void init() {
 		DoctorDTO doctorDTO1 = new DoctorDTO("test1", "test1@gmail.com", "123456", "99999999", Specialty.ORTHOPEDICS,
@@ -56,7 +59,7 @@ public class DoctorServiceTest {
 		DoctorDTO doctorDTO3 = new DoctorDTO("test3", "test3@gmail.com", "112131", "99999999", Specialty.ORTHOPEDICS,
 				new AddressDTO("TEST STREET", "NEIGHBORHOOD", "12345678", "CITY", "ST", null, null));
 	
-		doctorRepository.save(new Doctor(doctorDTO1));
+		testDoctor = doctorRepository.save(new Doctor(doctorDTO1));
 		doctorRepository.save(new Doctor(doctorDTO2));
 		doctorRepository.save(new Doctor(doctorDTO3));
 	}
@@ -103,5 +106,19 @@ public class DoctorServiceTest {
 		Page<DoctorPublicDataDTO> doctors = doctorService.findDoctors(pageable);
 		
 		assertEquals(doctors.getSize(), 3);
+	}
+	
+	/**
+	 * Updates a existing doctor by id
+	 */
+	@Test
+	@DisplayName("Should update an valid doctor")
+	public void testUpdateDoctor() throws Exception {
+		
+		DoctorUpdatedDataDTO doctorUpdatedData = new DoctorUpdatedDataDTO(testDoctor.getId(), "updated_test", null, null);
+		
+		Doctor doctor = doctorService.updateDoctor(doctorUpdatedData);
+		
+		assertEquals(doctorUpdatedData.name(), doctor.getName());
 	}
 }
