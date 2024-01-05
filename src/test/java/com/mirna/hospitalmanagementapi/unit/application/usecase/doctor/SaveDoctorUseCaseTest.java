@@ -12,7 +12,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
 import com.mirna.hospitalmanagementapi.HospitalManagementApiApplication;
-import com.mirna.hospitalmanagementapi.application.usecase.doctor.AddDoctorUseCase;
+import com.mirna.hospitalmanagementapi.application.usecase.doctor.SaveDoctorUseCase;
 import com.mirna.hospitalmanagementapi.domain.dtos.AddressDTO;
 import com.mirna.hospitalmanagementapi.domain.dtos.DoctorDTO;
 import com.mirna.hospitalmanagementapi.domain.entities.Doctor;
@@ -27,10 +27,10 @@ import com.mirna.hospitalmanagementapi.domain.repositories.DoctorRepository;
 @SpringBootTest(classes = HospitalManagementApiApplication.class)
 @TestInstance(Lifecycle.PER_CLASS)
 @ActiveProfiles("test")
-public class AddDoctorUseCaseTest {
+public class SaveDoctorUseCaseTest {
 
 	@Autowired
-	private AddDoctorUseCase addDoctor;
+	private SaveDoctorUseCase saveDoctor;
 	
 	@Autowired
 	private DoctorRepository doctorRepository;
@@ -46,13 +46,13 @@ public class AddDoctorUseCaseTest {
 	 */
 	@Test
 	@DisplayName("Should execute save method")
-	public void testAddDoctor() throws Exception {
+	public void testSaveDoctor() throws Exception {
 		DoctorDTO doctorDTO = new DoctorDTO("test", "test@gmail.com", "123456", "99999999", Specialty.ORTHOPEDICS,
 				new AddressDTO("TEST STREET", "NEIGHBORHOOD", "12345678", "CITY", "ST", null, null));
 				
 		Doctor doctor = new Doctor(doctorDTO);
 		
-		doctor = addDoctor.execute(doctor);
+		doctor = saveDoctor.execute(doctor);
 
 		assertNotNull(doctor.getId());
 	}
