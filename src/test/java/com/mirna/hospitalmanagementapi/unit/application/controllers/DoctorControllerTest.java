@@ -18,6 +18,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mirna.hospitalmanagementapi.domain.dtos.AddressDTO;
 import com.mirna.hospitalmanagementapi.domain.dtos.DoctorDTO;
+import com.mirna.hospitalmanagementapi.domain.dtos.DoctorUpdatedDataDTO;
 import com.mirna.hospitalmanagementapi.domain.entities.Doctor;
 import com.mirna.hospitalmanagementapi.domain.enums.Specialty;
 import com.mirna.hospitalmanagementapi.domain.repositories.DoctorRepository;
@@ -42,6 +43,8 @@ public class DoctorControllerTest {
 	@Autowired
 	private DoctorRepository doctorRepository;
 	
+	private Doctor testDoctor;
+	
 	@BeforeAll
 	public void init() {
 		DoctorDTO doctorDTO1 = new DoctorDTO("test1", "test1@gmail.com", "123456", "99999999", Specialty.ORTHOPEDICS,
@@ -53,7 +56,7 @@ public class DoctorControllerTest {
 		DoctorDTO doctorDTO3 = new DoctorDTO("test3", "test3@gmail.com", "112131", "99999999", Specialty.ORTHOPEDICS,
 				new AddressDTO("TEST STREET", "NEIGHBORHOOD", "12345678", "CITY", "ST", null, null));
 	
-		doctorRepository.save(new Doctor(doctorDTO1));
+		testDoctor = doctorRepository.save(new Doctor(doctorDTO1));
 		doctorRepository.save(new Doctor(doctorDTO2));
 		doctorRepository.save(new Doctor(doctorDTO3));
 	}
@@ -107,5 +110,37 @@ public class DoctorControllerTest {
 		mockMvc.perform(MockMvcRequestBuilders.get("/api/v1.0/doctors?size=3").contentType(MediaType.APPLICATION_JSON)
 				.characterEncoding("UTF-8"))
 				.andExpect(MockMvcResultMatchers.status().isOk()).andDo(MockMvcResultHandlers.print());
+	}
+	
+	/**
+	 * Put a valid doctor
+	 */
+	@Test
+	@DisplayName("Should put a valid doctor and return http status ok")
+	public void testPutValidDoctor() throws Exception {
+
+		DoctorUpdatedDataDTO doctorUpdatedDataDTO = new DoctorUpdatedDataDTO(testDoctor.getId(), "updated_test", null, null);
+
+		String doctorUpdatedDataDTOContent = mapper.writeValueAsString(doctorUpdatedDataDTO);
+
+		mockMvc.perform(MockMvcRequestBuilders.put("/api/v1.0/doctors").contentType(MediaType.APPLICATION_JSON)
+				.characterEncoding("UTF-8").content(doctorUpdatedDataDTOContent))
+				.andExpect(MockMvcResultMatchers.status().isOk()).andDo(MockMvcResultHandlers.print());
+	}
+	
+	/**
+	 * Avoid putting a invalid doctor.
+	 */
+	@Test
+	@DisplayName("Should not put invalid doctor and return http status bad request")
+	public void testPutInvalidDoctor() throws Exception {
+
+		DoctorUpdatedDataDTO doctorUpdatedDataDTO = new DoctorUpdatedDataDTO(null, "updated_test", null, null);
+
+		String doctorUpdatedDataDTOContent = mapper.writeValueAsString(doctorUpdatedDataDTO);
+
+		mockMvc.perform(MockMvcRequestBuilders.put("/api/v1.0/doctors").contentType(MediaType.APPLICATION_JSON)
+				.characterEncoding("UTF-8").content(doctorUpdatedDataDTOContent))
+				.andExpect(MockMvcResultMatchers.status().isBadRequest()).andDo(MockMvcResultHandlers.print());
 	}
 }
