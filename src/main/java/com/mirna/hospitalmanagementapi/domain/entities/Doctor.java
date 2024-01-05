@@ -3,6 +3,7 @@ package com.mirna.hospitalmanagementapi.domain.entities;
 import com.mirna.hospitalmanagementapi.domain.dtos.DoctorDTO;
 import com.mirna.hospitalmanagementapi.domain.enums.Specialty;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -43,15 +44,19 @@ public class Doctor {
 	private Long id;
 	
 	@NotBlank(message="name cannot be blank")
+	@Column(name="name")
 	private String name;
 	
 	@NotBlank(message="email cannot be blank")
+	@Column(name="email")
 	private String email;
 	
 	@NotBlank(message="crm cannot be blank")
+	@Column(name="crm", length = 6)
 	private String crm;
 	
 	@NotBlank(message="telephone cannot be blank")
+	@Column(name="telephone")
 	private String telephone;
 	
 	@NotNull(message="specialty cannot be null")

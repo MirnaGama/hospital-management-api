@@ -3,6 +3,7 @@ package com.mirna.hospitalmanagementapi.domain.entities;
 import com.mirna.hospitalmanagementapi.domain.dtos.AddressDTO;
 import com.mirna.hospitalmanagementapi.domain.dtos.DoctorDTO;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
@@ -35,23 +36,30 @@ public class Address {
 	}
 	
 	@NotBlank(message="street cannot be blank")
+	@Column(name="street")
 	private String street;
 	
 	@NotBlank(message="neighborhood cannot be blank")
+	@Column(name="neighborhood")
 	private String neighborhood;
 	
 	@NotBlank(message="zipCode cannot be blank")
 	@Pattern(regexp="\\d{8}", message="invalid format for zipCode")
+	@Column(name="zip_code")
 	private String zipCode;
 	
 	@NotBlank(message="city cannot be blank")
+	@Column(name="city")
 	private String city;
 	
 	@NotBlank(message="state cannot be blank")
+	@Column(name="state")
 	private String state;
 	
+	@Column(name="additional_details")
 	private String additionalDetails;
 	
+	@Column(name="house_number")
 	private String houseNumber;
 	
 	/**
