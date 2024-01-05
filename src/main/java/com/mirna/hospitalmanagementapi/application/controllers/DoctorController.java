@@ -9,12 +9,14 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.mirna.hospitalmanagementapi.domain.dtos.DoctorDTO;
 import com.mirna.hospitalmanagementapi.domain.dtos.DoctorPublicDataDTO;
+import com.mirna.hospitalmanagementapi.domain.dtos.DoctorUpdatedDataDTO;
 import com.mirna.hospitalmanagementapi.domain.entities.Doctor;
 import com.mirna.hospitalmanagementapi.domain.services.DoctorService;
 
@@ -64,5 +66,21 @@ public class DoctorController {
 		Page<DoctorPublicDataDTO> doctors = doctorService.findDoctors(pageable);
 		
 		return ResponseEntity.ok(doctors);
+	}
+	
+	/**
+	 * Put method to update a existing doctor record by provided ID
+	 *
+	 * @param doctorUpdatedDataDTO Data Transfer Object containing allowed data to be updated in Doctor entity
+	 * 
+	 * @return A response entity containing the saved doctor if successful, or
+	 * a 400-level error if there is a validation error
+	 */
+	@PutMapping
+	public ResponseEntity<Object> putDoctor(@RequestBody @Valid DoctorUpdatedDataDTO doctorUpdatedDataDTO) {
+		
+		Doctor doctor = doctorService.updateDoctor(doctorUpdatedDataDTO);
+		
+		return ResponseEntity.ok(doctor);
 	}
 }
