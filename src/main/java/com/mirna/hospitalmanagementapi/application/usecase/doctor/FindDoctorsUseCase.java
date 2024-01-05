@@ -27,10 +27,10 @@ public class FindDoctorsUseCase {
 	 * 
 	 * @param pageable Pagination information, such as size and page number
 	 * 
-	 * @return A paginated list with stored doctors if successful, or null if there is an error
+	 * @return A paginated list with active stored doctors if successful, or null if there is an error
 	 *
 	 */
 	public Page<Doctor> execute(Pageable pageable) {
-        return this.doctorRepository.findAll(pageable);
+        return this.doctorRepository.findDoctorsByActiveTrue(pageable);
     }
 }
