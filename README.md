@@ -120,4 +120,31 @@ Hospital Management API built in Spring Boot
 | `200` | _Successful operation_ |
 
 
+#### PUT - [**/api/v1.0/doctors**] - Updates a existing doctor
+
+- **Body:**
+```
+{   
+    "id" (number, required),
+    "name" (string, optional), 
+    "telephone" (string, optional),  
+    "address": {   
+        "street" (string, optional),
+        "neighborhood" (string, optional), 
+        "zipcode" (string, optional),  
+        "city" (string, optional),  
+        "state" (string, optional),
+        "additionalDetails" (string, optional),  
+        "houseNumber" (string, optional),
+    } 
+}
+```
+
+- **Responses:**
+
+| Code  | Description |
+| ------------- | ------------- |
+| `200` | _Successful operation_ |
+| `400` | _Validation Error_ |
+
 
