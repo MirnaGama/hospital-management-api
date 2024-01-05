@@ -32,7 +32,7 @@ public class Doctor {
 	public Doctor(DoctorDTO doctorDTO) {
 		this.name=doctorDTO.name();
 		this.email=doctorDTO.email();
-		this.crm=doctorDTO.email();
+		this.crm=doctorDTO.crm();
 		this.telephone=doctorDTO.telephone();
 		this.specialty=doctorDTO.specialty();
 		this.address = new Address(doctorDTO.address());
