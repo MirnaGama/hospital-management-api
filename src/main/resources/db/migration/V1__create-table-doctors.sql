@@ -8,9 +8,9 @@ create table doctors (
     telephone varchar(20) not null,
     street varchar(100) not null,
     neighborhood varchar(100) not null,
-    zipCode varchar(9) not null,
-    additionalDetails varchar(100),
-    houseNumber varchar(20),
+    zip_code varchar(9) not null,
+    additional_details varchar(100),
+    house_number varchar(20),
     state varchar(2) not null,
     city varchar(100) not null,
 
