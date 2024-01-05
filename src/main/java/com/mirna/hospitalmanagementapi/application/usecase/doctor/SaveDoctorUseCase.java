@@ -13,7 +13,7 @@ import com.mirna.hospitalmanagementapi.domain.repositories.DoctorRepository;
  * @version 1.0
  */
 @Component
-public class AddDoctorUseCase {
+public class SaveDoctorUseCase {
 
 	@Autowired
 	private DoctorRepository doctorRepository;
