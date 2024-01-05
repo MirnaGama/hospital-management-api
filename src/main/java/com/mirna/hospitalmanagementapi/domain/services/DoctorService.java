@@ -43,4 +43,12 @@ public interface DoctorService {
 	 * @return The updated doctor if successful,  or null if there is an error.
 	 */
     public Doctor updateDoctor(DoctorUpdatedDataDTO doctorUpdatedDataDTO);
+    
+    /**
+     * Deactivates an existing doctor record by provided id
+     * @param id Long that represents the doctor's unique identifier
+	 *  
+	 * @return The deactivated doctor if successful,  or null if there is an error.
+	 */
+    public Doctor deactivateDoctor(Long id);
 }

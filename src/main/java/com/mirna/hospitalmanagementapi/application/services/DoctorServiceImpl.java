@@ -127,4 +127,23 @@ public class DoctorServiceImpl implements DoctorService {
 		
 	}
 
+    /**
+     * Deactivates an existing doctor record by provided id
+     * @param id Long that represents the doctor's unique identifier
+	 *  
+	 * @return The deactivated doctor if successful, or null if there is an error.
+	 */
+	@Override
+	public Doctor deactivateDoctor(Long id) {
+		Doctor doctor = findDoctorById.execute(id);
+		
+		if (doctor != null) {
+			doctor.setActive(false);
+			
+			return saveDoctor.execute(doctor);
+		}
+		
+		return null;
+	}
+
 }
