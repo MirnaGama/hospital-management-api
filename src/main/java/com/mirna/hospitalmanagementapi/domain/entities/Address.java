@@ -5,6 +5,7 @@ import com.mirna.hospitalmanagementapi.domain.dtos.DoctorDTO;
 
 import jakarta.persistence.Embeddable;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 
 /**
 * 
@@ -40,6 +41,7 @@ public class Address {
 	private String neighborhood;
 	
 	@NotBlank(message="zipCode cannot be blank")
+	@Pattern(regexp="\\d{8}", message="invalid format for zipCode")
 	private String zipCode;
 	
 	@NotBlank(message="city cannot be blank")
@@ -94,7 +96,7 @@ public class Address {
 
 	/**
 	 * Sets the zip code
-	 * @param zipCode Must not be blank.
+	 * @param zipCode Must have 8 characters and not be blank
 	 */
 	public void setZipCode(String zipCode) {
 		this.zipCode = zipCode;
