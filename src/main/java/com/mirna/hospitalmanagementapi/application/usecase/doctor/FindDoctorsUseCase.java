@@ -11,7 +11,7 @@ import com.mirna.hospitalmanagementapi.domain.entities.Doctor;
 import com.mirna.hospitalmanagementapi.domain.repositories.DoctorRepository;
 
 /**
- * This class is used to execute the findAll method from doctor repository
+ * This class is used to execute the findDoctorsByActiveTrue method from doctor repository
  * 
  * @author Mirna Gama
  * @version 1.0
@@ -23,7 +23,7 @@ public class FindDoctorsUseCase {
 	private DoctorRepository doctorRepository;
 	
 	/**
-	 * Executes the findAll method from Doctor repository
+	 * Executes the findDoctorsByActiveTrue method from Doctor repository
 	 * 
 	 * @param pageable Pagination information, such as size and page number
 	 * 

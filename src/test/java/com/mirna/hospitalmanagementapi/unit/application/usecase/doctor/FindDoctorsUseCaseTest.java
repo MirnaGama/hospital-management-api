@@ -65,11 +65,11 @@ public class FindDoctorsUseCaseTest {
 	}
 	
 	/**
-	 * Should execute findAll method with pagination successfully
+	 * Should execute findDoctorsByActiveTrue method with pagination successfully
 	 * 
 	 */
 	@Test
-	@DisplayName("Should execute findAll method with pagination")
+	@DisplayName("Should execute findDoctorsByActiveTrue method with pagination")
 	public void testFindDoctors() throws Exception {
 		Pageable pageable = PageRequest.of(0, 3);
 		
