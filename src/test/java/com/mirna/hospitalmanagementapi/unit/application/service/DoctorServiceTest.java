@@ -2,6 +2,7 @@ package com.mirna.hospitalmanagementapi.unit.application.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -120,5 +121,19 @@ public class DoctorServiceTest {
 		Doctor doctor = doctorService.updateDoctor(doctorUpdatedData);
 		
 		assertEquals(doctorUpdatedData.name(), doctor.getName());
+	}
+	
+	/**
+	 * Deactivates a existing doctor by id
+	 */
+	@Test
+	@DisplayName("Should deactivate a doctor")
+	public void testDeactivateDoctor() throws Exception {
+		
+		Long id = testDoctor.getId();
+		
+		Doctor doctor = doctorService.deactivateDoctor(id);
+		
+		assertFalse(doctor.getActive());
 	}
 }
