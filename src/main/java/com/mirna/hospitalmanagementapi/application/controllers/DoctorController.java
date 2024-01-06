@@ -1,5 +1,6 @@
 package com.mirna.hospitalmanagementapi.application.controllers;
 
+import java.net.URI;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.ResponseEntity.BodyBuilder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,11 +17,15 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.util.UriBuilder;
+import org.springframework.web.util.UriComponents;
+import org.springframework.web.util.UriComponentsBuilder;
 
-import com.mirna.hospitalmanagementapi.domain.dtos.DoctorDTO;
-import com.mirna.hospitalmanagementapi.domain.dtos.DoctorPublicDataDTO;
-import com.mirna.hospitalmanagementapi.domain.dtos.DoctorUpdatedDataDTO;
+import com.mirna.hospitalmanagementapi.domain.dtos.doctor.DoctorDTO;
+import com.mirna.hospitalmanagementapi.domain.dtos.doctor.DoctorPublicDataDTO;
+import com.mirna.hospitalmanagementapi.domain.dtos.doctor.DoctorUpdatedDataDTO;
 import com.mirna.hospitalmanagementapi.domain.entities.Doctor;
+import com.mirna.hospitalmanagementapi.domain.entities.Patient;
 import com.mirna.hospitalmanagementapi.domain.services.DoctorService;
 
 import jakarta.validation.Valid;
@@ -43,7 +49,7 @@ public class DoctorController {
 	 * @param doctorDTO The data transfer object containing data for Doctor
 	 * entity.
 	 * 
-	 * @return A response entity containing the saved doctor if successful, or
+	 * @return A response entity containing the saved doctor and created status if successful, or
 	 * a 400-level error if there is a validation error
 	 */
 	@PostMapping
@@ -51,8 +57,30 @@ public class DoctorController {
 		
 		Doctor doctor = doctorService.addDoctor(doctorDTO);
 		
-		return ResponseEntity.ok(doctor);
+		UriComponents uriComponents = UriComponentsBuilder
+				.fromUriString("/api/v1.0/doctors/{id}") 
+				.encode() 
+				.build(); 
+
+		URI uri = uriComponents.expand(doctor.getId()).toUri();
 		
+		return ResponseEntity.created(uri).body(doctor);
+	}
+	
+	/**
+	 * Get method to receive a Doctor record by the provided ID
+	 *
+	 * @param id A long representing the doctor's unique identifier
+	 * 
+	 * @return A response entity containing the saved doctor if successful, or
+	 * a 404 level error if it is non-existent
+	 */
+	@GetMapping("/{id}")
+	public ResponseEntity<Object> getDoctor(@PathVariable Long id) {
+	
+		Doctor doctor = doctorService.findDoctorById(id);
+		
+		return ResponseEntity.ok(doctor);
 	}
 	
 	/**

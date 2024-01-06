@@ -9,12 +9,14 @@ import com.mirna.hospitalmanagementapi.application.usecase.doctor.SaveDoctorUseC
 import com.mirna.hospitalmanagementapi.application.usecase.doctor.FindDoctorByIdUseCase;
 import com.mirna.hospitalmanagementapi.application.usecase.doctor.FindDoctorsUseCase;
 import com.mirna.hospitalmanagementapi.domain.dtos.AddressDTO;
-import com.mirna.hospitalmanagementapi.domain.dtos.DoctorDTO;
-import com.mirna.hospitalmanagementapi.domain.dtos.DoctorPublicDataDTO;
-import com.mirna.hospitalmanagementapi.domain.dtos.DoctorUpdatedDataDTO;
+import com.mirna.hospitalmanagementapi.domain.dtos.doctor.DoctorDTO;
+import com.mirna.hospitalmanagementapi.domain.dtos.doctor.DoctorPublicDataDTO;
+import com.mirna.hospitalmanagementapi.domain.dtos.doctor.DoctorUpdatedDataDTO;
 import com.mirna.hospitalmanagementapi.domain.entities.Address;
 import com.mirna.hospitalmanagementapi.domain.entities.Doctor;
 import com.mirna.hospitalmanagementapi.domain.services.DoctorService;
+
+import jakarta.persistence.EntityNotFoundException;
 
 /**
  * This class is an implementation of the DoctorService interface.
@@ -50,6 +52,23 @@ public class DoctorServiceImpl implements DoctorService {
 		
 		return saveDoctor.execute(doctor);
 	}
+	
+	/**
+	 * Finds a stored doctor by id.
+	 * 
+	 * @param id A long representing the doctor's unique identifier
+	 * @return The corresponding doctor if successful, or throws an
+	 *         EntityNotFoundException if it is non-existent.
+	 * @throws EntityNotFoundException When doctor with id provided is non-existent
+	 */
+	@Override
+	public Doctor findDoctorById(Long id) throws EntityNotFoundException {
+		Doctor doctor = findDoctorById.execute(id);
+		
+		if (doctor == null) throw new EntityNotFoundException();
+		
+		return doctor;
+	}
 
 	/**
 	 * Finds doctors from the database.
@@ -70,10 +89,12 @@ public class DoctorServiceImpl implements DoctorService {
 	 * @return The updated doctor if successful,  or null if there is an error.
 	 */
 	@Override
-	public Doctor updateDoctor(DoctorUpdatedDataDTO doctorUpdatedDataDTO) {
+	public Doctor updateDoctor(DoctorUpdatedDataDTO doctorUpdatedDataDTO) throws EntityNotFoundException {
 		Doctor doctor = findDoctorById.execute(doctorUpdatedDataDTO.id());
 		
-		if (doctor != null) {
+		if (doctor == null) {
+		 throw new EntityNotFoundException();	
+		}
 			
 		if (doctorUpdatedDataDTO.name() != null) {
 			doctor.setName(doctorUpdatedDataDTO.name());
@@ -121,8 +142,6 @@ public class DoctorServiceImpl implements DoctorService {
 		
 		doctor = saveDoctor.execute(doctor);
 		
-		}
-		
 		return doctor;
 		
 	}
@@ -134,16 +153,16 @@ public class DoctorServiceImpl implements DoctorService {
 	 * @return The deactivated doctor if successful, or null if there is an error.
 	 */
 	@Override
-	public Doctor deactivateDoctor(Long id) {
+	public Doctor deactivateDoctor(Long id) throws EntityNotFoundException {
 		Doctor doctor = findDoctorById.execute(id);
-		
-		if (doctor != null) {
-			doctor.setActive(false);
-			
-			return saveDoctor.execute(doctor);
+
+		if (doctor == null) {
+			throw new EntityNotFoundException();
 		}
-		
-		return null;
+			
+		doctor.setActive(false);
+
+		return saveDoctor.execute(doctor);
 	}
 
 }
