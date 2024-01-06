@@ -97,6 +97,19 @@ public class DoctorServiceTest {
 	}
 	
 	/**
+	 * Finds a doctor by provided id.
+	 */
+	@Test
+	@DisplayName("Should find doctor by id")
+	public void testFindPatientById() throws Exception {
+		
+		Doctor doctor = doctorService.findDoctorById(testDoctor.getId());
+
+		assertNotNull(doctor);
+		
+	}
+	
+	/**
 	 * Finds doctors stored in the database with pagination
 	 */
 	@Test

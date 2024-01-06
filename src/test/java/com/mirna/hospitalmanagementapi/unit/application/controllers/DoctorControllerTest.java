@@ -101,6 +101,20 @@ public class DoctorControllerTest {
 	}
 	
 	/**
+	 * Get doctor by id
+	 */
+	@Test
+	@DisplayName("Should get doctor by id and return http status OK")
+	public void testGetDoctor() throws Exception {
+
+		Long id = testDoctor.getId();
+		
+		mockMvc.perform(MockMvcRequestBuilders.get("/api/v1.0/doctors/{id}", id).contentType(MediaType.APPLICATION_JSON)
+				.characterEncoding("UTF-8"))
+				.andExpect(MockMvcResultMatchers.status().isOk()).andDo(MockMvcResultHandlers.print());
+	}
+	
+	/**
 	 * Get doctors with pagination
 	 */
 	@Test
