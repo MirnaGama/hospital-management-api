@@ -26,6 +26,15 @@ public interface DoctorService {
 	* @return The saved doctor if successful,  or null if there is an error.
 	*/
     public Doctor addDoctor(DoctorDTO doctorDTO);
+
+	/**
+   	* Finds a stored doctor by id.
+   	* 
+   	* @param id A long representing the doctor's unique identifier
+   	* @return The corresponding doctor if successful, or null if it is non-existent.
+   	*/
+    public Doctor findDoctorById(Long id);
+	
     /**
 	 * Retrieves a paginated sublist of doctors.
 	 * 
