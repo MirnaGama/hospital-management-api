@@ -118,7 +118,7 @@ public class Patient {
 	  * Returns the cpf
 	 * @return A string representing the patient's cpf.
 	 */
-	public String getCrm() {
+	public String getCpf() {
 		return cpf;
 	}
 
