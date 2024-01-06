@@ -80,7 +80,7 @@ public class DoctorControllerTest {
 
 		mockMvc.perform(MockMvcRequestBuilders.post("/api/v1.0/doctors").contentType(MediaType.APPLICATION_JSON)
 				.characterEncoding("UTF-8").content(doctorDTOContent))
-				.andExpect(MockMvcResultMatchers.status().isOk()).andDo(MockMvcResultHandlers.print());
+				.andExpect(MockMvcResultMatchers.status().isCreated()).andDo(MockMvcResultHandlers.print());
 	}
 	
 	/**
