@@ -50,7 +50,7 @@ Hospital Management API built in Spring Boot
 
 | Code  | Description |
 | ------------- | ------------- |
-| `200` | _Successful operation_ |
+| `201` | _Successfully created_ |
 | `400` | _Validation Error_ |
 
 #### GET - [**/api/v1.0/doctors**] - Get a list of doctors
