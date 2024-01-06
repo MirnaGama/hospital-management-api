@@ -76,7 +76,7 @@ public class DoctorServiceTest {
 	@Test
 	@DisplayName("Should add valid doctor")
 	public void testAddValidDoctor() throws Exception {
-		DoctorDTO doctorDTO = new DoctorDTO("test", "test@gmail.com", "123456", "99999999", Specialty.ORTHOPEDICS,
+		DoctorDTO doctorDTO = new DoctorDTO("test", "test@gmail.com", "101010", "99999999", Specialty.ORTHOPEDICS,
 				new AddressDTO("TEST STREET", "NEIGHBORHOOD", "12345678", "CITY", "ST", null, null));
 		
 		Doctor doctor = doctorService.addDoctor(doctorDTO);
@@ -90,7 +90,7 @@ public class DoctorServiceTest {
 	@Test
 	@DisplayName("Should not add doctor with invalid parameter")
 	public void testAddInvalidDoctor() throws Exception {
-		DoctorDTO doctorDTO = new DoctorDTO("", "test@gmail.com", "123456", "99999999", Specialty.ORTHOPEDICS,
+		DoctorDTO doctorDTO = new DoctorDTO("", "test@gmail.com", "111111", "99999999", Specialty.ORTHOPEDICS,
 				new AddressDTO("TEST STREET", "NEIGHBORHOOD", "12345678", "CITY", "ST", null, null));
 		
 		assertThrows(ConstraintViolationException.class, () ->  doctorService.addDoctor(doctorDTO));
