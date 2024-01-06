@@ -186,3 +186,33 @@ Hospital Management API built in Spring Boot
 | `200` | _Successful operation_ |
 | `400` | _Validation Error_ |
 
+### /patients
+
+#### POST - [**/api/v1.0/patients**] - Adds a new patient
+
+- **Body:**
+```
+{   
+    "name" (string, required),  
+    "email" (string, required),  
+    "cpf" (string, required),  
+    "telephone" (string, required), 
+    "address": {   
+        "street" (string, required),
+        "neighborhood" (string, required), 
+        "zipCode" (string, required),  
+        "city" (string, required),  
+        "state" (string, required),
+        "additionalDetails" (string, optional),  
+        "houseNumber" (string, optional)
+    } 
+}
+```
+
+- **Responses:**
+
+| Code  | Description |
+| ------------- | ------------- |
+| `201` | _Successfully created_ |
+| `400` | _Validation Error_ |
+
