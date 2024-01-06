@@ -1,6 +1,6 @@
 package com.mirna.hospitalmanagementapi.domain.entities;
 
-import com.mirna.hospitalmanagementapi.domain.dtos.PatientDTO;
+import com.mirna.hospitalmanagementapi.domain.dtos.patient.PatientDTO;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embedded;
