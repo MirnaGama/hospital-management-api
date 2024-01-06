@@ -216,3 +216,68 @@ Hospital Management API built in Spring Boot
 | `201` | _Successfully created_ |
 | `400` | _Validation Error_ |
 
+#### GET - [**/api/v1.0/patients**] - Get a list of patients
+
+- **Response Body Example:**
+```
+{
+    "content": [
+        {
+            "name": "Test1",
+            "email": "test1@gmail.com",
+            "cpf": "123456"
+        },
+        {
+            "name": "Test2",
+            "email": "test2@gmail.com",
+            "cpf": "789101"
+        },
+        {
+            "name": "Test3",
+            "email": "test3@gmail.com",
+            "cpf": "112131"
+        },
+    ],
+    "pageable": {
+        "pageNumber": 0,
+        "pageSize": 10,
+        "sort": {
+            "sorted": true,
+            "unsorted": false,
+            "empty": false
+        },
+        "offset": 0,
+        "paged": true,
+        "unpaged": false
+    },
+    "totalPages": 1,
+    "totalElements": 3,
+    "last": true,
+    "sort": {
+        "sorted": true,
+        "unsorted": false,
+        "empty": false
+    },
+    "number": 0,
+    "size": 10,
+    "first": true,
+    "numberOfElements": 3,
+    "empty": false
+}
+```
+
+- **Request Parameters:**
+
+| Key  | Description |
+| ------------- | ------------- |
+| `size` | _Number of records that should be returned_ |
+| `sort` | _Sort by object attribute in descending order_ |
+| `page` | _Page number_ |
+
+- **Responses:**
+
+| Code  | Description |
+| ------------- | ------------- |
+| `200` | _Successful operation_ |
+
+
