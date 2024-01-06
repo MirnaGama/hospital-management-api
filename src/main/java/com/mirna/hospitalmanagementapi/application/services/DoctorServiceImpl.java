@@ -57,8 +57,10 @@ public class DoctorServiceImpl implements DoctorService {
 	 * Finds a stored doctor by id.
 	 * 
 	 * @param id A long representing the doctor's unique identifier
+	 * 
 	 * @return The corresponding doctor if successful, or throws an
 	 *         EntityNotFoundException if it is non-existent.
+	 *         
 	 * @throws EntityNotFoundException When doctor with id provided is non-existent
 	 */
 	@Override
@@ -86,7 +88,9 @@ public class DoctorServiceImpl implements DoctorService {
      * Updates an existing doctor record
      * @param doctorUpdatedDataDTO Data transfer object containing the doctor updated data along with their corresponding id 
 	 *  
-	 * @return The updated doctor if successful,  or null if there is an error.
+	 * @return The updated doctor if successful,  or throws an
+	 *         EntityNotFoundException if it is non-existent.
+	 * @throws EntityNotFoundException When doctor with id provided is non-existent
 	 */
 	@Override
 	public Doctor updateDoctor(DoctorUpdatedDataDTO doctorUpdatedDataDTO) throws EntityNotFoundException {
@@ -150,7 +154,9 @@ public class DoctorServiceImpl implements DoctorService {
      * Deactivates an existing doctor record by provided id
      * @param id Long that represents the doctor's unique identifier
 	 *  
-	 * @return The deactivated doctor if successful, or null if there is an error.
+	 * @return The deactivated doctor if successful, or throws an
+	 *         EntityNotFoundException if it is non-existent.
+	 *  @throws EntityNotFoundException When doctor with id provided is non-existent 
 	 */
 	@Override
 	public Doctor deactivateDoctor(Long id) throws EntityNotFoundException {
