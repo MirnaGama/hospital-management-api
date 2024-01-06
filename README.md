@@ -12,7 +12,7 @@ Hospital Management API built in Spring Boot
 - [X] R1 - Doctor Registration
 - [X] R2 - List of Doctors
 - [X] R3 - Doctor Update
-- [ ] R4 - Doctor Exclusion
+- [X] R4 - Doctor Exclusion
 - [ ] R5 - Patient Registration
 - [ ] R6 - List of Patients
 - [ ] R7 - Patient Update
