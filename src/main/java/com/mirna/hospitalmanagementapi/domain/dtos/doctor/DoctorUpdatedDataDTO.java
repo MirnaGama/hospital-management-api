@@ -1,4 +1,6 @@
-package com.mirna.hospitalmanagementapi.domain.dtos;
+package com.mirna.hospitalmanagementapi.domain.dtos.doctor;
+
+import com.mirna.hospitalmanagementapi.domain.dtos.AddressDTO;
 
 import jakarta.validation.constraints.NotNull;
 
