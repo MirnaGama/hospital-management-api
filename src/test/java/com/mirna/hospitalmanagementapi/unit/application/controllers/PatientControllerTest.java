@@ -45,10 +45,18 @@ public class PatientControllerTest {
 	
 	@BeforeAll
 	public void init() {
-		PatientDTO patientDTO = new PatientDTO("test", "test@gmail.com", "11111111111", "99999999",
+		PatientDTO patientDTO1 = new PatientDTO("test1", "test1@gmail.com", "11111111111", "99999999",
 				new AddressDTO("TEST STREET", "NEIGHBORHOOD", "12345678", "CITY", "ST", null, null));
 		
-		testPatient = patientRepository.save(new Patient(patientDTO));
+		PatientDTO patientDTO2 = new PatientDTO("test2", "test2@gmail.com", "22222222222", "99999999",
+				new AddressDTO("TEST STREET", "NEIGHBORHOOD", "12345678", "CITY", "ST", null, null));
+		
+		PatientDTO patientDTO3 = new PatientDTO("test3", "test3@gmail.com", "33333333333", "99999999",
+				new AddressDTO("TEST STREET", "NEIGHBORHOOD", "12345678", "CITY", "ST", null, null));
+		
+		testPatient = patientRepository.save(new Patient(patientDTO1));
+		patientRepository.save(new Patient(patientDTO2));
+		patientRepository.save(new Patient(patientDTO3));
 	}
 	
 	@AfterAll
@@ -63,7 +71,7 @@ public class PatientControllerTest {
 	@DisplayName("Should post valid patient and return http status created")
 	public void testPostValidPatient() throws Exception {
 	
-		PatientDTO patientDTO = new PatientDTO("test1", "test1@gmail.com", "10111111111", "99999999",
+		PatientDTO patientDTO = new PatientDTO("test4", "test4@gmail.com", "10111111111", "99999999",
 				new AddressDTO("TEST STREET", "NEIGHBORHOOD", "12345678", "CITY", "ST", null, null));
 	
 		String patientDTOContent = mapper.writeValueAsString(patientDTO);
@@ -80,7 +88,7 @@ public class PatientControllerTest {
 	@DisplayName("Should not post invalid patient and return http status bad request")
 	public void testPostInvalidDoctor() throws Exception {
 
-		PatientDTO patientDTO = new PatientDTO("", "test2@gmail.com", "10111111112", "99999999",
+		PatientDTO patientDTO = new PatientDTO("", "test5@gmail.com", "10111111112", "99999999",
 				new AddressDTO("TEST STREET", "NEIGHBORHOOD", "12345678", "CITY", "ST", null, null));
 
 		String patientDTOContent = mapper.writeValueAsString(patientDTO);
@@ -100,6 +108,18 @@ public class PatientControllerTest {
 		Long id = testPatient.getId();
 		
 		mockMvc.perform(MockMvcRequestBuilders.get("/api/v1.0/patients/{id}", id).contentType(MediaType.APPLICATION_JSON)
+				.characterEncoding("UTF-8"))
+				.andExpect(MockMvcResultMatchers.status().isOk()).andDo(MockMvcResultHandlers.print());
+	}
+	
+	/**
+	 * Get patients with pagination
+	 */
+	@Test
+	@DisplayName("Should get doctors with pagination and return http status OK")
+	public void testGetDoctors() throws Exception {
+
+		mockMvc.perform(MockMvcRequestBuilders.get("/api/v1.0/patients?size=3").contentType(MediaType.APPLICATION_JSON)
 				.characterEncoding("UTF-8"))
 				.andExpect(MockMvcResultMatchers.status().isOk()).andDo(MockMvcResultHandlers.print());
 	}
