@@ -1,5 +1,6 @@
 package com.mirna.hospitalmanagementapi.unit.application.service;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -11,12 +12,16 @@ import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.test.context.ActiveProfiles;
 
 import com.mirna.hospitalmanagementapi.HospitalManagementApiApplication;
 import com.mirna.hospitalmanagementapi.application.services.PatientServiceImpl;
 import com.mirna.hospitalmanagementapi.domain.dtos.AddressDTO;
 import com.mirna.hospitalmanagementapi.domain.dtos.patient.PatientDTO;
+import com.mirna.hospitalmanagementapi.domain.dtos.patient.PatientPublicDataDTO;
 import com.mirna.hospitalmanagementapi.domain.entities.Patient;
 import com.mirna.hospitalmanagementapi.domain.repositories.PatientRepository;
 
@@ -42,10 +47,18 @@ public class PatientServiceTest {
 	
 	@BeforeAll
 	public void init() {
-		PatientDTO patientDTO = new PatientDTO("test", "test@gmail.com", "11111111111", "99999999",
+		PatientDTO patientDTO1 = new PatientDTO("test1", "test1@gmail.com", "11111111111", "99999999",
 				new AddressDTO("TEST STREET", "NEIGHBORHOOD", "12345678", "CITY", "ST", null, null));
 		
-		testPatient = patientRepository.save(new Patient(patientDTO));
+		PatientDTO patientDTO2 = new PatientDTO("test2", "test2@gmail.com", "22222222222", "99999999",
+				new AddressDTO("TEST STREET", "NEIGHBORHOOD", "12345678", "CITY", "ST", null, null));
+		
+		PatientDTO patientDTO3 = new PatientDTO("test3", "test3@gmail.com", "33333333333", "99999999",
+				new AddressDTO("TEST STREET", "NEIGHBORHOOD", "12345678", "CITY", "ST", null, null));
+		
+		testPatient = patientRepository.save(new Patient(patientDTO1));
+		patientRepository.save(new Patient(patientDTO2));
+		patientRepository.save(new Patient(patientDTO3));
 	}
 	
 	@AfterAll
@@ -58,7 +71,7 @@ public class PatientServiceTest {
 	@Test
 	@DisplayName("Should add valid patient")
 	public void testAddValidPatient() throws Exception {
-		PatientDTO patientDTO = new PatientDTO("test1", "test1@gmail.com", "10111111111", "99999999",
+		PatientDTO patientDTO = new PatientDTO("test4", "test4@gmail.com", "10111111111", "99999999",
 				new AddressDTO("TEST STREET", "NEIGHBORHOOD", "12345678", "CITY", "ST", null, null));
 		
 		Patient patient = patientService.addPatient(patientDTO);
@@ -72,7 +85,7 @@ public class PatientServiceTest {
 	@Test
 	@DisplayName("Should not add patient with invalid parameter")
 	public void testAddInvalidPatient() throws Exception {
-		PatientDTO patientDTO = new PatientDTO("", "test2@gmail.com", "10111111112", "99999999",
+		PatientDTO patientDTO = new PatientDTO("", "test5@gmail.com", "10111111112", "99999999",
 				new AddressDTO("TEST STREET", "NEIGHBORHOOD", "12345678", "CITY", "ST", null, null));
 		
 		assertThrows(ConstraintViolationException.class, () ->  patientService.addPatient(patientDTO));
@@ -89,5 +102,18 @@ public class PatientServiceTest {
 
 		assertNotNull(patient);
 		
+	}
+	
+	/**
+	 * Finds patients stored in the database with pagination
+	 */
+	@Test
+	@DisplayName("Should find patients with pagination")
+	public void testFindPatients() throws Exception {
+		Pageable pageable = PageRequest.of(0, 3);
+		
+		Page<PatientPublicDataDTO> patients = patientService.findPatients(pageable);
+		
+		assertEquals(patients.getSize(), 3);
 	}
 }
