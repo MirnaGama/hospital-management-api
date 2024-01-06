@@ -149,3 +149,40 @@ Hospital Management API built in Spring Boot
 | `400` | _Validation Error_ |
 
 
+#### DELETE - [**/api/v1.0/doctors/{id}**] - Deactivates an existing doctor
+
+- **Response Body Example:**
+```
+{
+    "id": 2,
+    "name": "DEACTIVATED USER TEST",
+    "email": "test@gmail.com",
+    "crm": "12456",
+    "telephone": "(81) 99999999",
+    "specialty": "ORTHOPEDICS",
+    "active": false,
+    "address": {
+        "street": "TEST STR.",
+        "neighborhood": "TEST NEIGHBORHOOD",
+        "zipCode": "12345678",
+        "city": "TEST CITY",
+        "state": "ST",
+        "additionalDetails": null,
+        "houseNumber": null
+    }
+}
+```
+
+- **Request Parameters:**
+
+| Key  | Description |
+| ------------- | ------------- |
+| `id` | _Unique identifier of the doctor who will be deactivated_ |
+
+- **Responses:**
+
+| Code  | Description |
+| ------------- | ------------- |
+| `200` | _Successful operation_ |
+| `400` | _Validation Error_ |
+
