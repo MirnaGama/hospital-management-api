@@ -73,7 +73,7 @@ public class DoctorControllerTest {
 	@DisplayName("Should post valid doctor and return http status ok")
 	public void testPostValidDoctor() throws Exception {
 
-		DoctorDTO doctorDTO = new DoctorDTO("test", "test@gmail.com", "123456", "99999999", Specialty.ORTHOPEDICS,
+		DoctorDTO doctorDTO = new DoctorDTO("test", "test@gmail.com", "101010", "99999999", Specialty.ORTHOPEDICS,
 				new AddressDTO("TEST STREET", "NEIGHBORHOOD", "12345678", "CITY", "ST", null, null));
 
 		String doctorDTOContent = mapper.writeValueAsString(doctorDTO);
@@ -90,7 +90,7 @@ public class DoctorControllerTest {
 	@DisplayName("Should not post invalid doctor and return http status bad request")
 	public void testPostInvalidDoctor() throws Exception {
 
-		DoctorDTO doctorDTO = new DoctorDTO("", "test@gmail.com", "123456", "99999999", Specialty.ORTHOPEDICS,
+		DoctorDTO doctorDTO = new DoctorDTO("", "test@gmail.com", "111111", "99999999", Specialty.ORTHOPEDICS,
 				new AddressDTO("TEST STREET", "NEIGHBORHOOD", "12345678", "CITY", "ST", null, null));
 
 		String doctorDTOContent = mapper.writeValueAsString(doctorDTO);
