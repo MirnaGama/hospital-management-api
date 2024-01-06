@@ -14,5 +14,10 @@ import com.mirna.hospitalmanagementapi.domain.entities.Doctor;
 */
 public interface DoctorRepository extends JpaRepository<Doctor, Long> {
 
+	/**
+	 * 
+	 * @param pageable Pagination information, such as size and page number
+	 * @return A paginated list with active stored doctors if successful, or null if there is an error
+	 */
 	Page<Doctor> findDoctorsByActiveTrue(Pageable pageable);
 }
