@@ -101,7 +101,7 @@ public class DoctorServiceTest {
 	 */
 	@Test
 	@DisplayName("Should find doctor by id")
-	public void testFindPatientById() throws Exception {
+	public void testFindDoctorById() throws Exception {
 		
 		Doctor doctor = doctorService.findDoctorById(testDoctor.getId());
 
