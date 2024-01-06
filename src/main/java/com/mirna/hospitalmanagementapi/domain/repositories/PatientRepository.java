@@ -1,5 +1,7 @@
 package com.mirna.hospitalmanagementapi.domain.repositories;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.mirna.hospitalmanagementapi.domain.entities.Patient;
@@ -11,5 +13,12 @@ import com.mirna.hospitalmanagementapi.domain.entities.Patient;
 * @version 1.0
 */
 public interface PatientRepository extends JpaRepository<Patient, Long>{
+
+	/**
+	 * 
+	 * @param pageable Pagination information, such as size and page number
+	 * @return A paginated list with active stored patients if successful, or null if there is an error
+	 */
+	Page<Patient> findPatientsByActiveTrue(Pageable pageable);
 
 }
