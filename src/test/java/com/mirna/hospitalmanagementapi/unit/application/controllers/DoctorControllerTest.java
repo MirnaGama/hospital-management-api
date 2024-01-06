@@ -70,7 +70,7 @@ public class DoctorControllerTest {
 	 * Post a valid doctor.
 	 */
 	@Test
-	@DisplayName("Should post valid doctor and return http status ok")
+	@DisplayName("Should post valid doctor and return http status created")
 	public void testPostValidDoctor() throws Exception {
 
 		DoctorDTO doctorDTO = new DoctorDTO("test", "test@gmail.com", "101010", "99999999", Specialty.ORTHOPEDICS,
