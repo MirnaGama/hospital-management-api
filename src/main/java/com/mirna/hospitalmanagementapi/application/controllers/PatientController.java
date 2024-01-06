@@ -59,7 +59,7 @@ public class PatientController {
 	/**
 	 * Get method to receive a Patient record by the provided ID
 	 *
-	 * @param id
+	 * @param id A long representing the patient's unique identifier
 	 * 
 	 * @return A response entity containing the saved patient if successful, or
 	 * a 404 level error if it is non-existent
