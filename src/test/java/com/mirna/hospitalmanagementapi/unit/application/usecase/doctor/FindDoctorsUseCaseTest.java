@@ -22,7 +22,7 @@ import org.springframework.test.context.ActiveProfiles;
 import com.mirna.hospitalmanagementapi.HospitalManagementApiApplication;
 import com.mirna.hospitalmanagementapi.application.usecase.doctor.FindDoctorsUseCase;
 import com.mirna.hospitalmanagementapi.domain.dtos.AddressDTO;
-import com.mirna.hospitalmanagementapi.domain.dtos.DoctorDTO;
+import com.mirna.hospitalmanagementapi.domain.dtos.doctor.DoctorDTO;
 import com.mirna.hospitalmanagementapi.domain.entities.Doctor;
 import com.mirna.hospitalmanagementapi.domain.enums.Specialty;
 import com.mirna.hospitalmanagementapi.domain.repositories.DoctorRepository;

@@ -1,4 +1,4 @@
-package com.mirna.hospitalmanagementapi.domain.dtos;
+package com.mirna.hospitalmanagementapi.domain.dtos.doctor;
 
 import com.mirna.hospitalmanagementapi.domain.entities.Doctor;
 import com.mirna.hospitalmanagementapi.domain.enums.Specialty;

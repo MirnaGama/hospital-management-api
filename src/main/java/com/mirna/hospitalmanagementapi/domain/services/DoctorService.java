@@ -5,9 +5,9 @@ import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import com.mirna.hospitalmanagementapi.domain.dtos.DoctorDTO;
-import com.mirna.hospitalmanagementapi.domain.dtos.DoctorPublicDataDTO;
-import com.mirna.hospitalmanagementapi.domain.dtos.DoctorUpdatedDataDTO;
+import com.mirna.hospitalmanagementapi.domain.dtos.doctor.DoctorDTO;
+import com.mirna.hospitalmanagementapi.domain.dtos.doctor.DoctorPublicDataDTO;
+import com.mirna.hospitalmanagementapi.domain.dtos.doctor.DoctorUpdatedDataDTO;
 import com.mirna.hospitalmanagementapi.domain.entities.Doctor;
 
 /**
@@ -26,7 +26,6 @@ public interface DoctorService {
 	* @return The saved doctor if successful,  or null if there is an error.
 	*/
     public Doctor addDoctor(DoctorDTO doctorDTO);
-    
     /**
 	 * Retrieves a paginated sublist of doctors.
 	 * 
