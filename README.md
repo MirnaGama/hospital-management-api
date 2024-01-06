@@ -121,7 +121,7 @@ Hospital Management API built in Spring Boot
 | `200` | _Successful operation_ |
 
 
-#### PUT - [**/api/v1.0/doctors**] - Updates a existing doctor
+#### PUT - [**/api/v1.0/doctors**] - Updates an existing doctor
 
 - **Body:**
 ```
