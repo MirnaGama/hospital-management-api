@@ -143,4 +143,18 @@ public class DoctorControllerTest {
 				.characterEncoding("UTF-8").content(doctorUpdatedDataDTOContent))
 				.andExpect(MockMvcResultMatchers.status().isBadRequest()).andDo(MockMvcResultHandlers.print());
 	}
+	
+	/**
+	 * Delete a doctor
+	 */
+	@Test
+	@DisplayName("Should delete doctor and return http status ok")
+	public void testDeleteDoctor() throws Exception {
+
+		Long id = testDoctor.getId();
+		                    
+		mockMvc.perform(MockMvcRequestBuilders.delete("/api/v1.0/doctors/{id}", id).contentType(MediaType.APPLICATION_JSON)
+		    				.characterEncoding("UTF-8"))
+		    				.andExpect(MockMvcResultMatchers.status().isOk()).andDo(MockMvcResultHandlers.print());
+	}
 }
