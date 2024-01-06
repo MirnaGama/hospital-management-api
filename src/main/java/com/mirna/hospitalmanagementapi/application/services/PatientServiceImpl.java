@@ -1,11 +1,15 @@
 package com.mirna.hospitalmanagementapi.application.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.mirna.hospitalmanagementapi.application.usecase.patient.FindPatientByIdUseCase;
+import com.mirna.hospitalmanagementapi.application.usecase.patient.FindPatientsUseCase;
 import com.mirna.hospitalmanagementapi.application.usecase.patient.SavePatientUseCase;
 import com.mirna.hospitalmanagementapi.domain.dtos.patient.PatientDTO;
+import com.mirna.hospitalmanagementapi.domain.dtos.patient.PatientPublicDataDTO;
 import com.mirna.hospitalmanagementapi.domain.entities.Patient;
 import com.mirna.hospitalmanagementapi.domain.services.PatientService;
 import com.mirna.hospitalmanagementapi.infra.handlers.EntityNotFoundErrorHandler;
@@ -28,6 +32,9 @@ public class PatientServiceImpl implements PatientService {
 	
 	@Autowired
 	private FindPatientByIdUseCase findPatientById;
+	
+	@Autowired
+	private FindPatientsUseCase findPatients;
 	
 	/**
 	 * Adds a new patient to the database.
@@ -58,6 +65,18 @@ public class PatientServiceImpl implements PatientService {
 		if (patient == null) throw new EntityNotFoundException();
 		
 		return patient;
+	}
+
+	/**
+	 * Finds patients from the database.
+	 *
+	 * @param pageable Pagination information, such as size and page number
+	 * 
+	 * @return A paginated sublist containing data transfer objects with patients public information in the repository
+	 */
+	@Override
+	public Page<PatientPublicDataDTO> findPatients(Pageable pageable) {
+		return findPatients.execute(pageable).map(PatientPublicDataDTO::new);
 	}
 
 }

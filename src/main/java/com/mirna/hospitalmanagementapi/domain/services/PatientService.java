@@ -1,6 +1,10 @@
 package com.mirna.hospitalmanagementapi.domain.services;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 import com.mirna.hospitalmanagementapi.domain.dtos.patient.PatientDTO;
+import com.mirna.hospitalmanagementapi.domain.dtos.patient.PatientPublicDataDTO;
 import com.mirna.hospitalmanagementapi.domain.entities.Patient;
 
 /**
@@ -27,5 +31,14 @@ public interface PatientService {
 	* @return The corresponding patient if successful, or null if it is non-existent.
 	*/
     public Patient findPatientById(Long id);
+    
+    /**
+	 * Retrieves a paginated sublist of doctors.
+	 * 
+	 * @param pageable Pagination information, such as size and page number
+	 *  
+	 * @return A paginated sublist containing data transfer objects with patients public information in the repository
+	 */
+    public Page<PatientPublicDataDTO> findPatients(Pageable pageable);
     
 }
