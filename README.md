@@ -53,6 +53,43 @@ Hospital Management API built in Spring Boot
 | `201` | _Successfully created_ |
 | `400` | _Validation Error_ |
 
+#### GET - [**/api/v1.0/doctors/{id}**] - Get an existing doctor
+
+- **Response Body Example:**
+```
+{
+    "id": 1,
+    "name": "DOCTOR TEST",
+    "email": "test@gmail.com",
+    "crm": "12456",
+    "telephone": "(81) 99999999",
+    "specialty": "ORTHOPEDICS",
+    "active": true,
+    "address": {
+        "street": "TEST STR.",
+        "neighborhood": "TEST NEIGHBORHOOD",
+        "zipCode": "12345678",
+        "city": "TEST CITY",
+        "state": "ST",
+        "additionalDetails": null,
+        "houseNumber": null
+    }
+}
+```
+
+- **Request Parameters:**
+
+| Key  | Description |
+| ------------- | ------------- |
+| `id` | _Unique identifier of the doctor who will be fetched_ |
+
+- **Responses:**
+
+| Code  | Description |
+| ------------- | ------------- |
+| `200` | _Successful operation_ |
+| `404` | _Entity not found_ |
+
 #### GET - [**/api/v1.0/doctors**] - Get a list of doctors
 
 - **Response Body Example:**
@@ -215,6 +252,43 @@ Hospital Management API built in Spring Boot
 | ------------- | ------------- |
 | `201` | _Successfully created_ |
 | `400` | _Validation Error_ |
+
+
+#### GET - [**/api/v1.0/patients/{id}**] - Get an existing patient
+
+- **Response Body Example:**
+```
+{
+    "id": 1,
+    "name": "PATIENT TEST",
+    "email": "test@gmail.com",
+    "cpf": "11111111111",
+    "telephone": "(81) 99999999",
+    "active": true,
+    "address": {
+        "street": "TEST STR.",
+        "neighborhood": "TEST NEIGHBORHOOD",
+        "zipCode": "12345678",
+        "city": "TEST CITY",
+        "state": "ST",
+        "additionalDetails": null,
+        "houseNumber": null
+    }
+}
+```
+
+- **Request Parameters:**
+
+| Key  | Description |
+| ------------- | ------------- |
+| `id` | _Unique identifier of the patient who will be fetched_ |
+
+- **Responses:**
+
+| Code  | Description |
+| ------------- | ------------- |
+| `200` | _Successful operation_ |
+| `404` | _Entity not found_ |
 
 #### GET - [**/api/v1.0/patients**] - Get a list of patients
 
