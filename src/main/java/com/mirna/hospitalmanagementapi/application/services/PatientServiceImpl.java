@@ -140,4 +140,26 @@ public class PatientServiceImpl implements PatientService {
 		return patient;
 	}
 
+	/**
+	 * Deactivates an existing patient record by provided id
+	 * 
+	 * @param id Long that represents the patient's unique identifier
+	 * 
+	 * @return The deactivated patient if successful, or throws an
+	 *         EntityNotFoundException if it is non-existent.
+	 * @throws EntityNotFoundException When patient with id provided is non-existent
+	 */
+	@Override
+	public Patient deactivatePatient(Long id) throws EntityNotFoundException {
+		Patient patient = findPatientById.execute(id);
+
+		if (patient == null) {
+			throw new EntityNotFoundException();
+		}
+		
+		patient.setActive(false);
+
+		return savePatient.execute(patient);
+	}
+
 }
