@@ -5,6 +5,7 @@ import org.springframework.data.domain.Pageable;
 
 import com.mirna.hospitalmanagementapi.domain.dtos.patient.PatientDTO;
 import com.mirna.hospitalmanagementapi.domain.dtos.patient.PatientPublicDataDTO;
+import com.mirna.hospitalmanagementapi.domain.dtos.patient.PatientUpdatedDataDTO;
 import com.mirna.hospitalmanagementapi.domain.entities.Patient;
 
 /**
@@ -41,4 +42,11 @@ public interface PatientService {
 	 */
     public Page<PatientPublicDataDTO> findPatients(Pageable pageable);
     
+    /**
+     * Updates an existing patient record
+     * @param patientUpdatedDataDTO Data transfer object containing the patient updated data along with their corresponding id 
+	 *  
+	 * @return The updated patient if successful,  or null if there is an error.
+	 */
+    public Patient updatePatient(PatientUpdatedDataDTO patientUpdatedDataDTO);
 }
