@@ -22,6 +22,7 @@ import com.mirna.hospitalmanagementapi.application.services.PatientServiceImpl;
 import com.mirna.hospitalmanagementapi.domain.dtos.AddressDTO;
 import com.mirna.hospitalmanagementapi.domain.dtos.patient.PatientDTO;
 import com.mirna.hospitalmanagementapi.domain.dtos.patient.PatientPublicDataDTO;
+import com.mirna.hospitalmanagementapi.domain.dtos.patient.PatientUpdatedDataDTO;
 import com.mirna.hospitalmanagementapi.domain.entities.Patient;
 import com.mirna.hospitalmanagementapi.domain.repositories.PatientRepository;
 
@@ -115,5 +116,19 @@ public class PatientServiceTest {
 		Page<PatientPublicDataDTO> patients = patientService.findPatients(pageable);
 		
 		assertEquals(patients.getSize(), 3);
+	}
+	
+	/**
+	 * Updates an existing patient by id
+	 */
+	@Test
+	@DisplayName("Should update a valid patient") 
+	public void testUpdatePatient() throws Exception {
+		
+		PatientUpdatedDataDTO patientUpdatedData = new PatientUpdatedDataDTO(testPatient.getId(), "updated_test", null, null);
+		
+		Patient patient = patientService.updatePatient(patientUpdatedData);
+		
+		assertEquals(patientUpdatedData.name(), patient.getName());
 	}
 }
