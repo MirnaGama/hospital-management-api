@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,6 +19,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import com.mirna.hospitalmanagementapi.domain.dtos.patient.PatientDTO;
 import com.mirna.hospitalmanagementapi.domain.dtos.patient.PatientPublicDataDTO;
+import com.mirna.hospitalmanagementapi.domain.dtos.patient.PatientUpdatedDataDTO;
 import com.mirna.hospitalmanagementapi.domain.entities.Patient;
 import com.mirna.hospitalmanagementapi.domain.services.PatientService;
 
@@ -89,5 +91,21 @@ public class PatientController {
 		Page<PatientPublicDataDTO> patients = patientService.findPatients(pageable);
 		
 		return ResponseEntity.ok(patients);
+	}
+	
+	/**
+	 * Put method to update a existing patient record by provided ID
+	 *
+	 * @param patientUpdatedDataDTO Data Transfer Object containing allowed data to be updated in Patient entity
+	 * 
+	 * @return A response entity containing the saved patient if successful, or
+	 * a 400-level error if there is a validation error
+	 */
+	@PutMapping
+	public ResponseEntity<Object> putPatient(@RequestBody @Valid PatientUpdatedDataDTO patientUpdatedDataDTO) {
+		
+		Patient patient = patientService.updatePatient(patientUpdatedDataDTO);
+		
+		return ResponseEntity.ok(patient);
 	}
 }
