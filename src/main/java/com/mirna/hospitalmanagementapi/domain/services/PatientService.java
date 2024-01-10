@@ -49,4 +49,12 @@ public interface PatientService {
 	 * @return The updated patient if successful,  or null if there is an error.
 	 */
     public Patient updatePatient(PatientUpdatedDataDTO patientUpdatedDataDTO);
+    
+    /**
+     * Deactivates an existing patient record by provided id
+     * @param id Long that represents the patient's unique identifier
+	 *  
+	 * @return The deactivated patient if successful,  or null if there is an error.
+	 */
+    public Patient deactivatePatient(Long id);
 }
