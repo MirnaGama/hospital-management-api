@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -106,6 +107,20 @@ public class PatientController {
 		
 		Patient patient = patientService.updatePatient(patientUpdatedDataDTO);
 		
+		return ResponseEntity.ok(patient);
+	}
+	
+	/**
+	 * Delete method to deactivate an existing patient record by provided ID
+	 *
+	 * @param id Path variable that represents the patient's unique identifier
+	 * 
+	 * @return A response entity containing the deactivated patient if successful
+	 */
+	@DeleteMapping("/{id}")
+	public ResponseEntity<Object> deletePatient(@PathVariable Long id) {
+		Patient patient = patientService.deactivatePatient(id);
+
 		return ResponseEntity.ok(patient);
 	}
 }
