@@ -8,8 +8,11 @@ import org.springframework.stereotype.Service;
 import com.mirna.hospitalmanagementapi.application.usecase.patient.FindPatientByIdUseCase;
 import com.mirna.hospitalmanagementapi.application.usecase.patient.FindPatientsUseCase;
 import com.mirna.hospitalmanagementapi.application.usecase.patient.SavePatientUseCase;
+import com.mirna.hospitalmanagementapi.domain.dtos.AddressDTO;
 import com.mirna.hospitalmanagementapi.domain.dtos.patient.PatientDTO;
 import com.mirna.hospitalmanagementapi.domain.dtos.patient.PatientPublicDataDTO;
+import com.mirna.hospitalmanagementapi.domain.dtos.patient.PatientUpdatedDataDTO;
+import com.mirna.hospitalmanagementapi.domain.entities.Address;
 import com.mirna.hospitalmanagementapi.domain.entities.Patient;
 import com.mirna.hospitalmanagementapi.domain.services.PatientService;
 import com.mirna.hospitalmanagementapi.infra.handlers.EntityNotFoundErrorHandler;
@@ -77,6 +80,64 @@ public class PatientServiceImpl implements PatientService {
 	@Override
 	public Page<PatientPublicDataDTO> findPatients(Pageable pageable) {
 		return findPatients.execute(pageable).map(PatientPublicDataDTO::new);
+	}
+
+	 /**
+     * Updates an existing patient record
+     * @param patientUpdatedDataDTO Data transfer object containing the patient updated data along with their corresponding id 
+	 *  
+	 * @return The updated patient if successful,  or null if there is an error.
+	 */
+	@Override
+	public Patient updatePatient(PatientUpdatedDataDTO patientUpdatedDataDTO) {
+		
+		Patient patient = findPatientById.execute(patientUpdatedDataDTO.id());
+		
+		if (patient == null) throw new EntityNotFoundException();
+		
+		if (patientUpdatedDataDTO.name() != null) patient.setName(patientUpdatedDataDTO.name());
+		
+		if (patientUpdatedDataDTO.telephone() != null) patient.setTelephone(patientUpdatedDataDTO.telephone());
+		
+		if (patientUpdatedDataDTO.address() != null) {
+
+			AddressDTO addressUpdatedDataDTO = patientUpdatedDataDTO.address();
+			Address address = patient.getAddress();
+
+			if (addressUpdatedDataDTO.street() != null) {
+				address.setStreet(addressUpdatedDataDTO.street());
+			}
+
+			if (addressUpdatedDataDTO.neighborhood() != null) {
+				address.setNeighborhood(addressUpdatedDataDTO.neighborhood());
+			}
+
+			if (addressUpdatedDataDTO.city() != null) {
+				address.setCity(addressUpdatedDataDTO.city());
+			}
+
+			if (addressUpdatedDataDTO.zipCode() != null) {
+				address.setZipCode(addressUpdatedDataDTO.zipCode());
+			}
+
+			if (addressUpdatedDataDTO.state() != null) {
+				address.setState(addressUpdatedDataDTO.state());
+			}
+
+			if (addressUpdatedDataDTO.additionalDetails() != null) {
+				address.setAdditionalDetails(addressUpdatedDataDTO.additionalDetails());
+			}
+
+			if (addressUpdatedDataDTO.houseNumber() != null) {
+				address.setHouseNumber(addressUpdatedDataDTO.houseNumber());
+			}
+
+			patient.setAddress(address);
+		}
+
+		patient = savePatient.execute(patient);
+		
+		return patient;
 	}
 
 }
