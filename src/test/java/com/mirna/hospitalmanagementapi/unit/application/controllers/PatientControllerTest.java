@@ -18,6 +18,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mirna.hospitalmanagementapi.domain.dtos.AddressDTO;
 import com.mirna.hospitalmanagementapi.domain.dtos.patient.PatientDTO;
+import com.mirna.hospitalmanagementapi.domain.dtos.patient.PatientUpdatedDataDTO;
 import com.mirna.hospitalmanagementapi.domain.entities.Patient;
 import com.mirna.hospitalmanagementapi.domain.repositories.PatientRepository;
 
@@ -122,5 +123,37 @@ public class PatientControllerTest {
 		mockMvc.perform(MockMvcRequestBuilders.get("/api/v1.0/patients?size=3").contentType(MediaType.APPLICATION_JSON)
 				.characterEncoding("UTF-8"))
 				.andExpect(MockMvcResultMatchers.status().isOk()).andDo(MockMvcResultHandlers.print());
+	}
+	
+	/**
+	 * Put a valid patient
+	 */
+	@Test
+	@DisplayName("Should put a valid patient and return http status ok")
+	public void testPutValidDoctor() throws Exception {
+
+		PatientUpdatedDataDTO patientUpdatedDataDTO = new PatientUpdatedDataDTO(testPatient.getId(), "updated_test", null, null);
+
+		String patientUpdatedDataDTOContent = mapper.writeValueAsString(patientUpdatedDataDTO);
+
+		mockMvc.perform(MockMvcRequestBuilders.put("/api/v1.0/patients").contentType(MediaType.APPLICATION_JSON)
+				.characterEncoding("UTF-8").content(patientUpdatedDataDTOContent))
+				.andExpect(MockMvcResultMatchers.status().isOk()).andDo(MockMvcResultHandlers.print());
+	}
+
+	/**
+	 * Avoid putting a invalid patient.
+	 */
+	@Test
+	@DisplayName("Should not put invalid patient and return http status bad request")
+	public void testPutInvalidDoctor() throws Exception {
+
+		PatientUpdatedDataDTO patientUpdatedDataDTO = new PatientUpdatedDataDTO(null, "updated_test", null, null);
+
+		String patientUpdatedDataDTOContent = mapper.writeValueAsString(patientUpdatedDataDTO);
+
+		mockMvc.perform(MockMvcRequestBuilders.put("/api/v1.0/patients").contentType(MediaType.APPLICATION_JSON)
+				.characterEncoding("UTF-8").content(patientUpdatedDataDTOContent))
+				.andExpect(MockMvcResultMatchers.status().isBadRequest()).andDo(MockMvcResultHandlers.print());
 	}
 }
