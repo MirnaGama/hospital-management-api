@@ -192,7 +192,7 @@ Hospital Management API built in Spring Boot
 ```
 {
     "id": 2,
-    "name": "DEACTIVATED USER TEST",
+    "name": "DEACTIVATED DOCTOR TEST",
     "email": "test@gmail.com",
     "crm": "12456",
     "telephone": "(81) 99999999",
@@ -222,6 +222,7 @@ Hospital Management API built in Spring Boot
 | ------------- | ------------- |
 | `200` | _Successful operation_ |
 | `400` | _Validation Error_ |
+| `404` | _Entity not found_ |
 
 ### /patients
 
@@ -381,4 +382,39 @@ Hospital Management API built in Spring Boot
 | `200` | _Successful operation_ |
 | `400` | _Validation Error_ |
 
+#### DELETE - [**/api/v1.0/patients/{id}**] - Deactivates an existing patient
 
+- **Response Body Example:**
+```
+{
+    "id": 1,
+    "name": "DEACTIVATED PATIENT TEST",
+    "email": "test@gmail.com",
+    "cpf": "11111111111",
+    "telephone": "(81) 99999999",
+    "active": false,
+    "address": {
+        "street": "TEST STR.",
+        "neighborhood": "TEST NEIGHBORHOOD",
+        "zipCode": "12345678",
+        "city": "TEST CITY",
+        "state": "ST",
+        "additionalDetails": null,
+        "houseNumber": null
+    }
+}
+```
+
+- **Request Parameters:**
+
+| Key  | Description |
+| ------------- | ------------- |
+| `id` | _Unique identifier of the patient who will be deactivated_ |
+
+- **Responses:**
+
+| Code  | Description |
+| ------------- | ------------- |
+| `200` | _Successful operation_ |
+| `400` | _Validation Error_ |
+| `404` | _Entity not found_ |
