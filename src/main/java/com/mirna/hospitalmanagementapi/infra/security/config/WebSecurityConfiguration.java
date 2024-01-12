@@ -28,7 +28,7 @@ public class WebSecurityConfiguration {
 		return   http.csrf(csrf -> csrf.disable())
 	            .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 	            .authorizeHttpRequests(req -> {
-	                req.requestMatchers(HttpMethod.POST, "/api/auth").permitAll();
+	                req.requestMatchers(HttpMethod.POST, "/api/auth/*").permitAll();
 	                req.anyRequest().authenticated();
 	            })
 	            .addFilterBefore(authTokenFilter, UsernamePasswordAuthenticationFilter.class)
