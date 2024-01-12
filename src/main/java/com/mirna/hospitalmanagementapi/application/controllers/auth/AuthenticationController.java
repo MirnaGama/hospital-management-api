@@ -52,6 +52,14 @@ public class AuthenticationController {
 		return ResponseEntity.ok(token);
 	}
 	
+	/**
+	 * Performs the user registration
+	 *
+	 * @param userDTO A data transfer object containing the user data to perform the registration
+	 * 
+	 * @return The registered user if successful, or null if there is an error.
+	 */
+
 	@PostMapping(value = "/register")
 	public ResponseEntity<Object> register(@RequestBody @Valid UserDTO userDTO) {
 		
