@@ -23,7 +23,7 @@ public class CreateJWTUseCase {
 	@Value("${api.security.token.secret}")
     private String secret;
 	
-	/**
+	/** Creates a json web token 
 	 * 
 	 * @param user The authenticated user
 	 * @return A string containing the json web token signed with Algorithm HMAC256
