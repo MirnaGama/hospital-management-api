@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.mirna.hospitalmanagementapi.domain.dtos.auth.UserLoginDTO;
+import com.mirna.hospitalmanagementapi.domain.dtos.auth.UserDTO;
 import com.mirna.hospitalmanagementapi.domain.entities.auth.User;
 import com.mirna.hospitalmanagementapi.domain.services.auth.AuthService;
 import com.mirna.hospitalmanagementapi.domain.services.auth.jwt.TokenService;
@@ -36,14 +36,14 @@ public class AuthenticationController {
 	/**
 	 * Performs the user login
 	 *
-	 * @param userLoginDTO A data transfer object containing the user data to perform the login
+	 * @param userDTO A data transfer object containing the user data to perform the login
 	 * 
 	 * @return The authorization token if successful, or an unauthorized status if there is an error.
 	 */
 	@PostMapping
-	public ResponseEntity<Object> login(@RequestBody @Valid UserLoginDTO userLoginDTO) {
+	public ResponseEntity<Object> login(@RequestBody @Valid UserDTO userDTO) {
 		
-		Authentication auth = authService.login(userLoginDTO);
+		Authentication auth = authService.login(userDTO);
 		
 		User authenticatedUser = (User) auth.getPrincipal();
 		
