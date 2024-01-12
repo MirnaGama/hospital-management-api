@@ -22,6 +22,44 @@ Hospital Management API built in Spring Boot
 
 ## API Documentation
 
+### /auth
+
+#### POST - [**/api/auth/register**] - Register a new user
+
+- **Body:**
+```
+{   
+    "login" (string, required),  
+    "password" (string, required), 
+}
+```
+
+- **Responses:**
+
+| Code  | Description |
+| ------------- | ------------- |
+| `200` | _Successfully operation_ |
+| `400` | _Validation Error_ |
+
+#### POST - [**/api/auth/login**] - Perform the login
+
+- **Body:**
+```
+{   
+    "login" (string, required),  
+    "password" (string, required), 
+}
+```
+
+- **Responses:**
+
+| Code  | Description |
+| ------------- | ------------- |
+| `200` | _Successfully operation_ |
+| `400` | _Validation Error_ |
+| `403` | _Incorrect credentials_ | 
+
+
 ### /doctors
 
 #### POST - [**/api/v1.0/doctors**] - Adds a new doctor
@@ -46,12 +84,19 @@ Hospital Management API built in Spring Boot
 }
 ```
 
+- **Request Headers:**
+
+| Key  | Description |
+| ------------- | ------------- |
+| `Authorization` | _Authorization token_ |
+
 - **Responses:**
 
 | Code  | Description |
 | ------------- | ------------- |
 | `201` | _Successfully created_ |
 | `400` | _Validation Error_ |
+| `403` | _Unauthorized / Invalid token_ | 
 
 #### GET - [**/api/v1.0/doctors/{id}**] - Get an existing doctor
 
@@ -77,6 +122,12 @@ Hospital Management API built in Spring Boot
 }
 ```
 
+- **Request Headers:**
+
+| Key  | Description |
+| ------------- | ------------- |
+| `Authorization` | _Authorization token_ |
+
 - **Request Parameters:**
 
 | Key  | Description |
@@ -89,6 +140,7 @@ Hospital Management API built in Spring Boot
 | ------------- | ------------- |
 | `200` | _Successful operation_ |
 | `404` | _Entity not found_ |
+| `403` | _Unauthorized / Invalid token_ | 
 
 #### GET - [**/api/v1.0/doctors**] - Get a list of doctors
 
@@ -143,6 +195,12 @@ Hospital Management API built in Spring Boot
 }
 ```
 
+- **Request Headers:**
+
+| Key  | Description |
+| ------------- | ------------- |
+| `Authorization` | _Authorization token_ |
+
 - **Request Parameters:**
 
 | Key  | Description |
@@ -156,6 +214,7 @@ Hospital Management API built in Spring Boot
 | Code  | Description |
 | ------------- | ------------- |
 | `200` | _Successful operation_ |
+| `403` | _Unauthorized / Invalid token_ | 
 
 
 #### PUT - [**/api/v1.0/doctors**] - Updates an existing doctor
@@ -178,12 +237,19 @@ Hospital Management API built in Spring Boot
 }
 ```
 
+- **Request Headers:**
+
+| Key  | Description |
+| ------------- | ------------- |
+| `Authorization` | _Authorization token_ |
+
 - **Responses:**
 
 | Code  | Description |
 | ------------- | ------------- |
 | `200` | _Successful operation_ |
 | `400` | _Validation Error_ |
+| `403` | _Unauthorized / Invalid token_ | 
 
 
 #### DELETE - [**/api/v1.0/doctors/{id}**] - Deactivates an existing doctor
@@ -210,6 +276,12 @@ Hospital Management API built in Spring Boot
 }
 ```
 
+- **Request Headers:**
+
+| Key  | Description |
+| ------------- | ------------- |
+| `Authorization` | _Authorization token_ |
+
 - **Request Parameters:**
 
 | Key  | Description |
@@ -223,6 +295,7 @@ Hospital Management API built in Spring Boot
 | `200` | _Successful operation_ |
 | `400` | _Validation Error_ |
 | `404` | _Entity not found_ |
+| `403` | _Unauthorized / Invalid token_ | 
 
 ### /patients
 
@@ -247,12 +320,19 @@ Hospital Management API built in Spring Boot
 }
 ```
 
+- **Request Headers:**
+
+| Key  | Description |
+| ------------- | ------------- |
+| `Authorization` | _Authorization token_ |
+
 - **Responses:**
 
 | Code  | Description |
 | ------------- | ------------- |
 | `201` | _Successfully created_ |
 | `400` | _Validation Error_ |
+| `403` | _Unauthorized / Invalid token_ | 
 
 
 #### GET - [**/api/v1.0/patients/{id}**] - Get an existing patient
@@ -278,6 +358,12 @@ Hospital Management API built in Spring Boot
 }
 ```
 
+- **Request Headers:**
+
+| Key  | Description |
+| ------------- | ------------- |
+| `Authorization` | _Authorization token_ |
+
 - **Request Parameters:**
 
 | Key  | Description |
@@ -290,6 +376,7 @@ Hospital Management API built in Spring Boot
 | ------------- | ------------- |
 | `200` | _Successful operation_ |
 | `404` | _Entity not found_ |
+| `403` | _Unauthorized / Invalid token_ | 
 
 #### GET - [**/api/v1.0/patients**] - Get a list of patients
 
@@ -341,6 +428,12 @@ Hospital Management API built in Spring Boot
 }
 ```
 
+- **Request Headers:**
+
+| Key  | Description |
+| ------------- | ------------- |
+| `Authorization` | _Authorization token_ |
+
 - **Request Parameters:**
 
 | Key  | Description |
@@ -354,6 +447,7 @@ Hospital Management API built in Spring Boot
 | Code  | Description |
 | ------------- | ------------- |
 | `200` | _Successful operation_ |
+| `403` | _Unauthorized / Invalid token_ | 
 
 #### PUT - [**/api/v1.0/patients**] - Updates an existing patient
 
@@ -375,12 +469,19 @@ Hospital Management API built in Spring Boot
 }
 ```
 
+- **Request Headers:**
+
+| Key  | Description |
+| ------------- | ------------- |
+| `Authorization` | _Authorization token_ |
+
 - **Responses:**
 
 | Code  | Description |
 | ------------- | ------------- |
 | `200` | _Successful operation_ |
 | `400` | _Validation Error_ |
+| `403` | _Unauthorized / Invalid token_ | 
 
 #### DELETE - [**/api/v1.0/patients/{id}**] - Deactivates an existing patient
 
@@ -405,6 +506,12 @@ Hospital Management API built in Spring Boot
 }
 ```
 
+- **Request Headers:**
+
+| Key  | Description |
+| ------------- | ------------- |
+| `Authorization` | _Authorization token_ |
+
 - **Request Parameters:**
 
 | Key  | Description |
@@ -418,3 +525,4 @@ Hospital Management API built in Spring Boot
 | `200` | _Successful operation_ |
 | `400` | _Validation Error_ |
 | `404` | _Entity not found_ |
+| `403` | _Unauthorized / Invalid token_ | 
