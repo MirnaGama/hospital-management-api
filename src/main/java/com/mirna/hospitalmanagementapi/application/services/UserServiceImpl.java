@@ -5,6 +5,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import com.mirna.hospitalmanagementapi.application.usecase.user.FindUserByLoginUseCase;
+import com.mirna.hospitalmanagementapi.application.usecase.user.SaveUserUseCase;
+import com.mirna.hospitalmanagementapi.domain.dtos.auth.UserDTO;
+import com.mirna.hospitalmanagementapi.domain.entities.auth.User;
 import com.mirna.hospitalmanagementapi.domain.services.UserService;
 
 /**
@@ -20,6 +23,9 @@ import com.mirna.hospitalmanagementapi.domain.services.UserService;
 public class UserServiceImpl implements UserService {
 
 	@Autowired
+	private SaveUserUseCase saveUser;
+	
+	@Autowired
 	private FindUserByLoginUseCase findUserByLogin;
 	
 	/**
@@ -31,6 +37,20 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public UserDetails findUserByLogin(String login) {
 		return findUserByLogin.execute(login);
+	}
+
+	/**
+	* Adds a new user to the repository.
+	* 
+	* @param userDTO A data transfer object representing a user to add.
+	* @return The saved user if successful,  or null if there is an error.
+	*/
+	@Override
+	public User addUser(UserDTO userDTO) {
+		
+		User user = new User(userDTO);
+		
+		return saveUser.execute(user);
 	}
 
 }
