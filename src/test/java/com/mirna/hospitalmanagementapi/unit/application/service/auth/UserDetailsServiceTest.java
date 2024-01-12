@@ -27,7 +27,6 @@ import com.mirna.hospitalmanagementapi.domain.repositories.auth.UserRepository;
 @SpringBootTest
 @AutoConfigureMockMvc(addFilters = false)
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-@TestMethodOrder(OrderAnnotation.class)
 @ActiveProfiles("test")
 public class UserDetailsServiceTest {
 
