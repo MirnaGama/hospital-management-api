@@ -7,6 +7,8 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.mirna.hospitalmanagementapi.domain.dtos.auth.UserDTO;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -24,6 +26,18 @@ import jakarta.validation.constraints.NotBlank;
 @Entity(name = "User")
 public class User implements UserDetails {
 
+	/**
+	* Constructor for class User
+	* @param userDTO  Data transfer object containing User entity information
+	* @see UserDTO
+	*/
+	public User(UserDTO userDTO) {
+		this.login = userDTO.login();
+		this.password = userDTO.password();
+	}
+	
+	public User() {}
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -35,7 +49,7 @@ public class User implements UserDetails {
 	@NotBlank(message = "password cannot be blank")
 	@Column(name = "password")
 	private String password;
-
+	
 	/**
 	 * Returns the user id.
 	 * 
