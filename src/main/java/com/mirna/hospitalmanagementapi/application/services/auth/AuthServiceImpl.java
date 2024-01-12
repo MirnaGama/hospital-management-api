@@ -6,7 +6,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
-import com.mirna.hospitalmanagementapi.domain.dtos.auth.UserLoginDTO;
+import com.mirna.hospitalmanagementapi.domain.dtos.auth.UserDTO;
 import com.mirna.hospitalmanagementapi.domain.services.auth.AuthService;
 
 /**
@@ -26,16 +26,15 @@ public class AuthServiceImpl implements AuthService {
 	/**
    	* Performs the user login
    	* 
-   	* @param userLoginDTO Data transfer object containing user credentials for login
+   	* @param userAuthDTO Data transfer object containing user credentials for authentication operations
    	* @return A fully authentication object including the credentials
    	*/
 	@Override
-	public Authentication login(UserLoginDTO userLoginDTO) {
-		UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(userLoginDTO.login(), 
-				userLoginDTO.password());
+	public Authentication login(UserDTO userDTO) {
+		UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(userDTO.login(), 
+				userDTO.password());
 		
 		return manager.authenticate(token);
 	}
-	
 	
 }
