@@ -43,7 +43,7 @@ public class User implements UserDetails {
 	private Long id;
 
 	@NotBlank(message = "login cannot be blank")
-	@Column(name = "login")
+	@Column(name = "login", unique=true)
 	private String login;
 
 	@NotBlank(message = "password cannot be blank")
@@ -62,7 +62,7 @@ public class User implements UserDetails {
 	/**
 	 * Sets the user id.
 	 * 
-	 * @param id The user's unique identifier.
+	 * @param id The user's unique identifier. Must be unique.
 	 */
 	public void setId(Long id) {
 		this.id = id;
