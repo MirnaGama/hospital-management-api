@@ -17,5 +17,13 @@ public interface TokenService {
 	 * @returns A string containing the authorization token
 	 */
 	public String generateToken(User user);
+	
+	/**
+	 * Gets the jwt subject 
+	 * 
+	 * @param token The json web token on request header
+	 * @return A string containing the subject from the decoded jwt
+	 */
+	public String getTokenSubject(String token);
 
 }
