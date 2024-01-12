@@ -14,7 +14,7 @@ public interface TokenService {
 	 * Generates the authorization token
 	 * 
 	 * @param user The authenticated user
-	 * @returns A string containing the authorization token
+	 * @return A string containing the authorization token
 	 */
 	public String generateToken(User user);
 	

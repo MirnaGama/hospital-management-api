@@ -31,7 +31,7 @@ public class UserServiceImpl implements UserService {
 	/**
    	* Finds a stored user information by login.
    	* 
-   	* @param id A long representing the user's system login
+   	* @param login A string representing the user's system login
    	* @return The corresponding user information if successful, or null if it is non-existent.
    	*/
 	@Override

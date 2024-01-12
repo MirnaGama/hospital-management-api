@@ -29,7 +29,7 @@ public class TokenServiceImpl implements TokenService {
 	 * Generates the authorization token 
 	 * 
 	 * @param user The authenticated user
-	 * @returns A string containing the authorization token
+	 * @return A string containing the authorization token
 	 */
 	@Override
 	public String generateToken(User user) {
