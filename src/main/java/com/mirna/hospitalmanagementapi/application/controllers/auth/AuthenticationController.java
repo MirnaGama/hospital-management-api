@@ -40,7 +40,7 @@ public class AuthenticationController {
 	 * 
 	 * @return The authorization token if successful, or an unauthorized status if there is an error.
 	 */
-	@PostMapping
+	@PostMapping(value = "/login")
 	public ResponseEntity<Object> login(@RequestBody @Valid UserDTO userDTO) {
 		
 		Authentication auth = authService.login(userDTO);
@@ -51,4 +51,13 @@ public class AuthenticationController {
 		
 		return ResponseEntity.ok(token);
 	}
+	
+	@PostMapping(value = "/register")
+	public ResponseEntity<Object> register(@RequestBody @Valid UserDTO userDTO) {
+		
+		User user = authService.register(userDTO);
+		
+		return ResponseEntity.ok(user);
+	}
+
 }
