@@ -67,7 +67,7 @@ public class DoctorServiceImpl implements DoctorService {
 	public Doctor findDoctorById(Long id) throws EntityNotFoundException {
 		Doctor doctor = findDoctorById.execute(id);
 		
-		if (doctor == null) throw new EntityNotFoundException();
+		if (doctor == null) throw new EntityNotFoundException("No existing doctor with this id");
 		
 		return doctor;
 	}
@@ -97,7 +97,7 @@ public class DoctorServiceImpl implements DoctorService {
 		Doctor doctor = findDoctorById.execute(doctorUpdatedDataDTO.id());
 		
 		if (doctor == null) {
-		 throw new EntityNotFoundException();	
+		 throw new EntityNotFoundException("No existing doctor with this id");	
 		}
 			
 		if (doctorUpdatedDataDTO.name() != null) {
@@ -163,7 +163,7 @@ public class DoctorServiceImpl implements DoctorService {
 		Doctor doctor = findDoctorById.execute(id);
 
 		if (doctor == null) {
-			throw new EntityNotFoundException();
+			throw new EntityNotFoundException("No existing doctor with this id");
 		}
 			
 		doctor.setActive(false);
