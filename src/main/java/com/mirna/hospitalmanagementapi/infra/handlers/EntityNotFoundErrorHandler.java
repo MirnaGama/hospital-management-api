@@ -4,6 +4,7 @@ import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -18,12 +19,9 @@ import jakarta.persistence.EntityNotFoundException;
  */
 @RestControllerAdvice
 public class EntityNotFoundErrorHandler {
-
-	@Autowired
-	private MessageSource messageSource;
 	
 	@ExceptionHandler({EntityNotFoundException.class}) 
-	public ResponseEntity<Object> handle(EntityNotFoundException expection) {
-		return ResponseEntity.notFound().build();
+	public ResponseEntity<Object> handle(EntityNotFoundException exception) {
+		return new ResponseEntity<>(exception.getMessage(), HttpStatus.NOT_FOUND);
 	}
 }

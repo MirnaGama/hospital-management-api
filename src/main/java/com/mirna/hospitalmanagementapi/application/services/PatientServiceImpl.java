@@ -15,7 +15,6 @@ import com.mirna.hospitalmanagementapi.domain.dtos.patient.PatientUpdatedDataDTO
 import com.mirna.hospitalmanagementapi.domain.entities.Address;
 import com.mirna.hospitalmanagementapi.domain.entities.Patient;
 import com.mirna.hospitalmanagementapi.domain.services.PatientService;
-import com.mirna.hospitalmanagementapi.infra.handlers.EntityNotFoundErrorHandler;
 
 import jakarta.persistence.EntityNotFoundException;
 
@@ -65,7 +64,7 @@ public class PatientServiceImpl implements PatientService {
 	public Patient findPatientById(Long id) throws EntityNotFoundException {
 		Patient patient = this.findPatientById.execute(id);
 		
-		if (patient == null) throw new EntityNotFoundException();
+		if (patient == null) throw new EntityNotFoundException("No existing patient with this id");
 		
 		return patient;
 	}
@@ -93,7 +92,7 @@ public class PatientServiceImpl implements PatientService {
 		
 		Patient patient = findPatientById.execute(patientUpdatedDataDTO.id());
 		
-		if (patient == null) throw new EntityNotFoundException();
+		if (patient == null) throw new EntityNotFoundException("No existing patient with this id");
 		
 		if (patientUpdatedDataDTO.name() != null) patient.setName(patientUpdatedDataDTO.name());
 		
@@ -154,7 +153,7 @@ public class PatientServiceImpl implements PatientService {
 		Patient patient = findPatientById.execute(id);
 
 		if (patient == null) {
-			throw new EntityNotFoundException();
+			throw new EntityNotFoundException("No existing patient with this id");
 		}
 		
 		patient.setActive(false);
