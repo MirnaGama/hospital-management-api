@@ -55,11 +55,11 @@ public class SaveConsultationUseCaseTest {
 	
 	@BeforeAll
 	public void init() {
-		PatientDTO patientDTO = new PatientDTO("test", "test@gmail.com", "11111111111", "99999999",
+		PatientDTO patientDTO = new PatientDTO("testPatient", "testPatient@gmail.com", "11111111111", "99999999",
 				new AddressDTO("TEST STREET", "NEIGHBORHOOD", "12345678", "CITY", "ST", null, null));
 		testPatient = this.patientRepository.save(new Patient(patientDTO));
 		
-		DoctorDTO doctorDTO = new DoctorDTO("test", "test@gmail.com", "123456", "99999999", Specialty.ORTHOPEDICS,
+		DoctorDTO doctorDTO = new DoctorDTO("testDoctor", "testDoctor@gmail.com", "123456", "99999999", Specialty.ORTHOPEDICS,
 				new AddressDTO("TEST STREET", "NEIGHBORHOOD", "12345678", "CITY", "ST", null, null));
 		testDoctor = this.doctorRepository.save(new Doctor(doctorDTO));
 	}
