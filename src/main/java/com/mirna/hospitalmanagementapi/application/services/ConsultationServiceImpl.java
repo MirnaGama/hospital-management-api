@@ -83,7 +83,7 @@ public class ConsultationServiceImpl implements ConsultationService {
 			doctor = findOneFreeDoctorBySpecialty.execute(consultationDTO.specialty(),
 					consultationDTO.consultationDate());
 
-			if (doctor == null) throw new EntityNotFoundException("There is no free doctor for this date with this specialty");
+			if (doctor == null) throw new ConsultationValidationException("There is no free doctor for this date with this specialty");
 			
 		} else {
 			throw new ConsultationValidationException("At least the specialty or doctor ID must be filled in");
