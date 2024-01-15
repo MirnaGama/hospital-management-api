@@ -57,11 +57,11 @@ public class FindConsultationByDoctorAndDateUseCaseTest {
 	public void init() {
 		testConsultationDate = LocalDateTime.of(2024, Month.JULY, 29, 19, 30, 40);
 		
-		PatientDTO patientDTO = new PatientDTO("test", "test@gmail.com", "11111111111", "99999999",
+		PatientDTO patientDTO = new PatientDTO("testPatient", "testPatient@gmail.com", "11111111111", "99999999",
 				new AddressDTO("TEST STREET", "NEIGHBORHOOD", "12345678", "CITY", "ST", null, null));
 		Patient patient = this.patientRepository.save(new Patient(patientDTO));
 		
-		DoctorDTO doctorDTO = new DoctorDTO("test", "test@gmail.com", "123456", "99999999", Specialty.ORTHOPEDICS,
+		DoctorDTO doctorDTO = new DoctorDTO("testDoctor", "testDoctor@gmail.com", "123456", "99999999", Specialty.ORTHOPEDICS,
 				new AddressDTO("TEST STREET", "NEIGHBORHOOD", "12345678", "CITY", "ST", null, null));
 		Doctor doctor = this.doctorRepository.save(new Doctor(doctorDTO));
 		
