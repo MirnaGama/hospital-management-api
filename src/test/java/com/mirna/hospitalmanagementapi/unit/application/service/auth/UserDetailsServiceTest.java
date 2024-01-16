@@ -38,7 +38,7 @@ public class UserDetailsServiceTest {
 
 	@BeforeAll
 	public void init() {
-		User user = new User(new UserDTO("test", "password"));
+		User user = new User(new UserDTO("test000", "p3ssw3rd"));
 		userRepository.save(user);
 	}
 	
@@ -54,7 +54,7 @@ public class UserDetailsServiceTest {
 	@Test
 	@DisplayName("Should load user by username")
 	public void testFindUserByLogin() throws Exception {
-		User user = (User) userDetailsService.loadUserByUsername("test");
+		User user = (User) userDetailsService.loadUserByUsername("test000");
 		
 		assertNotNull(user);
 	}
