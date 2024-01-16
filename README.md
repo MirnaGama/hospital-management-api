@@ -38,7 +38,7 @@ Hospital Management API built in Spring Boot
 
 | Code  | Description |
 | ------------- | ------------- |
-| `200` | _Successfully operation_ |
+| `200` | _Successful operation_ |
 | `400` | _Validation Error_ |
 
 #### POST - [**/api/auth/login**] - Perform the login
@@ -55,7 +55,7 @@ Hospital Management API built in Spring Boot
 
 | Code  | Description |
 | ------------- | ------------- |
-| `200` | _Successfully operation_ |
+| `200` | _Successful operation_ |
 | `400` | _Validation Error_ |
 | `403` | _Incorrect credentials_ | 
 
@@ -526,3 +526,32 @@ Hospital Management API built in Spring Boot
 | `400` | _Validation Error_ |
 | `404` | _Entity not found_ |
 | `403` | _Unauthorized / Invalid token_ | 
+
+### /consultations
+
+#### POST - [**/api/v1.0/consultations**] - Adds a new consultation
+
+- **Body:**
+```
+{   
+    "patientId" (number, required),  
+    "consultationDate" (string, required),  
+    "doctorId" (number, required if _specialty_ field is not filled),
+    "specialty" (string, required if _doctorId_ field is not filled)
+}
+```
+
+- **Request Headers:**
+
+| Key  | Description |
+| ------------- | ------------- |
+| `Authorization` | _Authorization token_ |
+
+- **Responses:**
+
+| Code  | Description |
+| ------------- | ------------- |
+| `200` | _Successful operation |
+| `400` | _Validation Error_ |
+| `403` | _Unauthorized / Invalid token_ | 
+| `404` | _Entity not found_ |
