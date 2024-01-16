@@ -36,7 +36,7 @@ public class FindUserByLoginUseCaseTest {
 	
 	@BeforeAll
 	public void init() {
-		User user = new User(new UserDTO("test", "password"));
+		User user = new User(new UserDTO("testUser", "password"));
 		userRepository.save(user);
 	}
 	
@@ -52,7 +52,7 @@ public class FindUserByLoginUseCaseTest {
 	@Test
 	@DisplayName("Should execute findUserByLogin method")
 	public void testFindUserByLogin() throws Exception {
-		User user = (User) findUserByLogin.execute("test");
+		User user = (User) findUserByLogin.execute("testUser");
 		
 		assertNotNull(user);
 	}
