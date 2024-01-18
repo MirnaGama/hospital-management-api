@@ -60,7 +60,7 @@ public class FindDoctorByIdUseCaseTest {
 	 */
 	@Test
 	@DisplayName("Should execute findById method")
-	public void testFindDoctors() throws Exception {
+	public void testFindDoctorById() throws Exception {
 		
 		Doctor doctor = findDoctorById.execute(testDoctor.getId());
 
