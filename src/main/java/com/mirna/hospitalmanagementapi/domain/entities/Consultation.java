@@ -2,6 +2,7 @@ package com.mirna.hospitalmanagementapi.domain.entities;
 
 import java.time.LocalDateTime;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.mirna.hospitalmanagementapi.domain.enums.ReasonCancellation;
 import com.mirna.hospitalmanagementapi.domain.enums.Specialty;
 
@@ -50,10 +51,12 @@ public class Consultation {
 	private LocalDateTime consultationDate;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"}) 
 	@JoinColumn(name="patient_id")
 	private Patient patient;
 
 	@ManyToOne(fetch = FetchType.LAZY)
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"}) 
 	@JoinColumn(name="doctor_id")
 	private Doctor doctor;
 	
