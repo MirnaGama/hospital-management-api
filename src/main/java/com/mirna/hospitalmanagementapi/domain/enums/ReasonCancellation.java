@@ -4,7 +4,7 @@ package com.mirna.hospitalmanagementapi.domain.enums;
 *  Reasons why the consultation was canceled
 *  @see #PATIENT_GAVE_UP
 *  @see #DOCTOR_CANCELED
-*  @see #OTHERS
+*  @see #OTHER
 */
 public enum ReasonCancellation {
 
