@@ -108,7 +108,7 @@ public class ConsultationControllerTest {
 
 		mockMvc.perform(MockMvcRequestBuilders.post("/api/v1.0/consultations").contentType(MediaType.APPLICATION_JSON)
 				.characterEncoding("UTF-8").content(consultationDTOContent))
-				.andExpect(MockMvcResultMatchers.status().isOk()).andDo(MockMvcResultHandlers.print());
+				.andExpect(MockMvcResultMatchers.status().isCreated()).andDo(MockMvcResultHandlers.print());
 	}
 	
 	/**
@@ -126,7 +126,7 @@ public class ConsultationControllerTest {
 
 		mockMvc.perform(MockMvcRequestBuilders.post("/api/v1.0/consultations").contentType(MediaType.APPLICATION_JSON)
 				.characterEncoding("UTF-8").content(consultationDTOContent))
-				.andExpect(MockMvcResultMatchers.status().isOk()).andDo(MockMvcResultHandlers.print());
+				.andExpect(MockMvcResultMatchers.status().isCreated()).andDo(MockMvcResultHandlers.print());
 	}
 	
 	/**
