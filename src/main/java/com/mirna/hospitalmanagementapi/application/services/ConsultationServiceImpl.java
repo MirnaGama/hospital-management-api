@@ -5,11 +5,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.mirna.hospitalmanagementapi.application.usecase.consultation.FindConsultationByDoctorAndDateUseCase;
+import com.mirna.hospitalmanagementapi.application.usecase.consultation.FindConsultationByIdUseCase;
 import com.mirna.hospitalmanagementapi.application.usecase.consultation.FindConsultationByPatientAndDateUseCase;
 import com.mirna.hospitalmanagementapi.application.usecase.consultation.SaveConsultationUseCase;
 import com.mirna.hospitalmanagementapi.application.usecase.doctor.FindDoctorByIdUseCase;
 import com.mirna.hospitalmanagementapi.application.usecase.doctor.FindOneFreeDoctorBySpecialtyUseCase;
 import com.mirna.hospitalmanagementapi.application.usecase.patient.FindPatientByIdUseCase;
+import com.mirna.hospitalmanagementapi.domain.dtos.consultation.ConsultationCanceledDTO;
 import com.mirna.hospitalmanagementapi.domain.dtos.consultation.ConsultationDTO;
 import com.mirna.hospitalmanagementapi.domain.entities.Consultation;
 import com.mirna.hospitalmanagementapi.domain.entities.Doctor;
@@ -33,6 +35,9 @@ public class ConsultationServiceImpl implements ConsultationService {
 	@Autowired
 	private SaveConsultationUseCase saveConsultation;
 
+	@Autowired
+	private FindConsultationByIdUseCase findConsultationById;
+	
 	@Autowired
 	private FindConsultationByDoctorAndDateUseCase findConsultationByDoctorAndDate;
 
@@ -90,6 +95,24 @@ public class ConsultationServiceImpl implements ConsultationService {
 		}
 
 		Consultation consultation = new Consultation(patient, doctor, consultationDTO.consultationDate());
+
+		return saveConsultation.execute(consultation);
+	}
+
+	/**
+	 * Cancels and updates an existing query in the repository
+	 * @param consultationCanceledDTO A data transfer object representing the consultation that will be canceled.
+	* @return The canceled consultation if successful,  or throws an exception if there is an error.
+	 */
+	@Override
+	public Consultation cancelConsultation(ConsultationCanceledDTO consultationCanceledDTO) {
+		Consultation consultation = findConsultationById.execute(consultationCanceledDTO.consultationId());
+
+		if (consultation == null)
+			throw new EntityNotFoundException("No existing consultation with this id");
+
+		consultation.setCanceled(true);
+		consultation.setReasonCancellation(consultationCanceledDTO.reasonCancellation()); // not working (yet)
 
 		return saveConsultation.execute(consultation);
 	}
