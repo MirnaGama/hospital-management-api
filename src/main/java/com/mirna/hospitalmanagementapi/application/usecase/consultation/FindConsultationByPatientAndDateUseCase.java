@@ -21,7 +21,7 @@ public class FindConsultationByPatientAndDateUseCase {
 	private ConsultationRepository consultationRepository;
 	
 	/**
-	 * Executes the findConsultationByPatientAndDate method from Doctor repository
+	 * Executes the findConsultationByPatientAndDate method from Consultation repository
 	 * 
 	 * @param patientId The patient's id from the consultation
 	 * @param consultationDate The date of the consultation
