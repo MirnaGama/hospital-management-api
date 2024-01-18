@@ -23,11 +23,14 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mirna.hospitalmanagementapi.domain.dtos.AddressDTO;
+import com.mirna.hospitalmanagementapi.domain.dtos.consultation.ConsultationCanceledDTO;
 import com.mirna.hospitalmanagementapi.domain.dtos.consultation.ConsultationDTO;
 import com.mirna.hospitalmanagementapi.domain.dtos.doctor.DoctorDTO;
 import com.mirna.hospitalmanagementapi.domain.dtos.patient.PatientDTO;
+import com.mirna.hospitalmanagementapi.domain.entities.Consultation;
 import com.mirna.hospitalmanagementapi.domain.entities.Doctor;
 import com.mirna.hospitalmanagementapi.domain.entities.Patient;
+import com.mirna.hospitalmanagementapi.domain.enums.ReasonCancellation;
 import com.mirna.hospitalmanagementapi.domain.enums.Specialty;
 import com.mirna.hospitalmanagementapi.domain.repositories.ConsultationRepository;
 import com.mirna.hospitalmanagementapi.domain.repositories.DoctorRepository;
@@ -54,6 +57,8 @@ public class ConsultationControllerTest {
 	private Long testDoctorId;
 	private Long testPatientId;
 	
+	private Long testConsultationId;
+	
 	@Autowired
 	private ConsultationRepository consultationRepository;
 	
@@ -68,12 +73,17 @@ public class ConsultationControllerTest {
 		
 		PatientDTO patientDTO1 = new PatientDTO("testPatient1", "testPatient1@gmail.com", "11111111111", "99999999",
 				new AddressDTO("TEST STREET", "NEIGHBORHOOD", "12345678", "CITY", "ST", null, null));
-		testPatientId = this.patientRepository.save(new Patient(patientDTO1)).getId();
+		Patient testPatient = this.patientRepository.save(new Patient(patientDTO1));
+		testPatientId = testPatient.getId();
 		
 		DoctorDTO doctorDTO1 = new DoctorDTO("testDoctor1", "testDoctor1@gmail.com", "123456", "99999999", Specialty.ORTHOPEDICS,
 				new AddressDTO("TEST STREET", "NEIGHBORHOOD", "12345678", "CITY", "ST", null, null));
-		testDoctorId = this.doctorRepository.save(new Doctor(doctorDTO1)).getId();
+		Doctor testDoctor = this.doctorRepository.save(new Doctor(doctorDTO1));
+		testDoctorId = testDoctor.getId();
 	
+		Consultation consultation = new Consultation(testPatient, testDoctor, LocalDateTime.of(2024, Month.DECEMBER, 14, 15, 34));
+		
+		testConsultationId = this.consultationRepository.save(consultation).getId();
 	}
 	
 	@AfterAll
@@ -135,6 +145,24 @@ public class ConsultationControllerTest {
 		mockMvc.perform(MockMvcRequestBuilders.post("/api/v1.0/consultations").contentType(MediaType.APPLICATION_JSON)
 				.characterEncoding("UTF-8").content(consultationDTOContent))
 				.andExpect(MockMvcResultMatchers.status().isBadRequest()).andDo(MockMvcResultHandlers.print());
+	}
+	
+	/**
+	 * Delete a valid consultation
+	 */
+	@Test
+	@Order(4)
+	@DisplayName("Should delete valid consultation")
+	public void testDeleteValidConsultation() throws Exception {
+
+		ConsultationCanceledDTO consultationCanceledDTO = new ConsultationCanceledDTO(testConsultationId, 
+				ReasonCancellation.PATIENT_GAVE_UP);
+
+		String consultationCanceledDTOContent = mapper.writeValueAsString(consultationCanceledDTO);
+
+		mockMvc.perform(MockMvcRequestBuilders.delete("/api/v1.0/consultations").contentType(MediaType.APPLICATION_JSON)
+				.characterEncoding("UTF-8").content(consultationCanceledDTOContent))
+				.andExpect(MockMvcResultMatchers.status().isOk()).andDo(MockMvcResultHandlers.print());
 	}
 	
 }
