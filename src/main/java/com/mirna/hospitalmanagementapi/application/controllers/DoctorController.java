@@ -72,8 +72,8 @@ public class DoctorController {
 	 *
 	 * @param id A long representing the doctor's unique identifier
 	 * 
-	 * @return A response entity containing the saved doctor if successful, or
-	 * a 404 level error if it is non-existent
+	 * @return A response entity containing the corresponding doctor if successful, or
+	 * a 400-level error if it is non-existent
 	 */
 	@GetMapping("/{id}")
 	public ResponseEntity<Object> getDoctor(@PathVariable Long id) {
