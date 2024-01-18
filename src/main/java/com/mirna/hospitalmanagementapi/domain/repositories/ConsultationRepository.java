@@ -26,6 +26,7 @@ public interface ConsultationRepository extends JpaRepository<Consultation, Long
 			select c from Consultation c
 			where c.patient.id = :patientId
 			and c.consultationDate = :consultationDate 
+			and c.canceled = false
 			""")
 	Consultation findConsultationByPatientAndDate(Long patientId, LocalDateTime consultationDate);
 
@@ -39,6 +40,7 @@ public interface ConsultationRepository extends JpaRepository<Consultation, Long
 			select c from Consultation c
 			where c.doctor.id = :doctorId
 			and c.consultationDate = :consultationDate 
+			and c.canceled = false
 			""")
 	Consultation findConsultationByDoctorAndDate(Long doctorId, LocalDateTime consultationDate);
 
