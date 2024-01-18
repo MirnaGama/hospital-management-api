@@ -19,7 +19,7 @@ public class SaveConsultationUseCase {
 	private ConsultationRepository consultationRepository;
 	
 	/**
-	 * Executes the save method from Doctor repository
+	 * Executes the save method from Consultation repository
 	 * 
 	 * @param consultation The Consultation to be saved in the repository
 	 * @return The saved consultation if successful, or null if there is an error
