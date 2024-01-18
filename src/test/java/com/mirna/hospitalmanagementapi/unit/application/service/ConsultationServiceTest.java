@@ -2,6 +2,7 @@ package com.mirna.hospitalmanagementapi.unit.application.service;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalDateTime;
 import java.time.Month;
@@ -22,12 +23,14 @@ import org.springframework.test.context.ActiveProfiles;
 import com.mirna.hospitalmanagementapi.HospitalManagementApiApplication;
 import com.mirna.hospitalmanagementapi.application.services.ConsultationServiceImpl;
 import com.mirna.hospitalmanagementapi.domain.dtos.AddressDTO;
+import com.mirna.hospitalmanagementapi.domain.dtos.consultation.ConsultationCanceledDTO;
 import com.mirna.hospitalmanagementapi.domain.dtos.consultation.ConsultationDTO;
 import com.mirna.hospitalmanagementapi.domain.dtos.doctor.DoctorDTO;
 import com.mirna.hospitalmanagementapi.domain.dtos.patient.PatientDTO;
 import com.mirna.hospitalmanagementapi.domain.entities.Consultation;
 import com.mirna.hospitalmanagementapi.domain.entities.Doctor;
 import com.mirna.hospitalmanagementapi.domain.entities.Patient;
+import com.mirna.hospitalmanagementapi.domain.enums.ReasonCancellation;
 import com.mirna.hospitalmanagementapi.domain.enums.Specialty;
 import com.mirna.hospitalmanagementapi.domain.exceptions.ConsultationValidationException;
 import com.mirna.hospitalmanagementapi.domain.repositories.ConsultationRepository;
@@ -55,6 +58,8 @@ public class ConsultationServiceTest {
 	
 	private Long testInactiveDoctorId;
 	private Long testInactivePatientId;
+	
+	private Long testConsultationId;
 	
 	private LocalDateTime testConsultationDate1;
 	private LocalDateTime testConsultationDate2;
@@ -142,6 +147,8 @@ public class ConsultationServiceTest {
 		
 		Consultation consultation = consultationService.addConsultation(consultationDTO);
 		
+		testConsultationId = consultation.getId();
+		
 		assertNotNull(consultation.getId());
 		
 	}
@@ -216,6 +223,22 @@ public class ConsultationServiceTest {
 		ConsultationDTO consultationDTO = new ConsultationDTO(testInactiveDoctorId, testPatientId1, LocalDateTime.now(), null);
 		
 		assertThrows(ConsultationValidationException.class, () -> consultationService.addConsultation(consultationDTO));
+	}
+	
+	/**
+	 * Cancels a valid consultation by consultation id
+	 * 
+	 */
+	@Test
+	@Order(8)
+	@DisplayName("Should cancel a consultation by consultation id")
+	public void testCancelValidConsultation() throws Exception {
+		
+		ConsultationCanceledDTO consultationCanceledDTO = new ConsultationCanceledDTO(testConsultationId, ReasonCancellation.PATIENT_GAVE_UP);
+		
+		Consultation consultation = consultationService.cancelConsultation(consultationCanceledDTO);
+		
+		assertTrue(consultation.isCanceled());
 	}
 	
 	
