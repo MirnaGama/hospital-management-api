@@ -37,7 +37,8 @@ public interface DoctorRepository extends JpaRepository<Doctor, Long> {
 			and specialty = :specialty
 			and d.id not in (
 				select c.doctor.id from Consultation c
-				where c.consultationDate = :consultationDate
+				where c.consultationDate = :consultationDate 
+				and c.canceled = false
 			)
 			order by rand()
 			limit 1
