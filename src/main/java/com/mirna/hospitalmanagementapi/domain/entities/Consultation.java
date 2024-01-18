@@ -2,8 +2,13 @@ package com.mirna.hospitalmanagementapi.domain.entities;
 
 import java.time.LocalDateTime;
 
+import com.mirna.hospitalmanagementapi.domain.enums.ReasonCancellation;
+import com.mirna.hospitalmanagementapi.domain.enums.Specialty;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -32,6 +37,7 @@ public class Consultation {
 		this.patient=patient;
 		this.doctor=doctor;
 		this.consultationDate=consultationDate;
+		this.canceled=false;
 	}
 	
 	public Consultation() {}
@@ -46,10 +52,17 @@ public class Consultation {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="patient_id")
 	private Patient patient;
-	
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="doctor_id")
 	private Doctor doctor;
+	
+	@Column(name="canceled")
+	private boolean canceled;
+	
+	@Column(name="reason_cancellation")
+	@Enumerated(EnumType.STRING)
+	private ReasonCancellation reasonCancellation;
 
 	/**
 	 *  Returns the consultation id.
@@ -113,6 +126,39 @@ public class Consultation {
 	 */
 	public void setDoctor(Doctor doctor) {
 		this.doctor = doctor;
+	}
+
+	/**
+	  * Returns the canceled
+	 * @return A boolean value that states whether the consultation is canceled in the system
+	 */
+	public boolean isCanceled() {
+		return canceled;
+	}
+
+	/**
+	 * Sets the canceled
+	 * @param canceled Must not be null. Starts with the false value by default
+	 */
+	public void setCanceled(boolean canceled) {
+		this.canceled = canceled;
+	}
+
+	/**
+	  * Returns the reason of consultation cancellation
+	 * @return An enum class representing the reason of cancellation.
+	 * @see ReasonCancellation
+	 */
+	public ReasonCancellation getReasonCancellation() {
+		return reasonCancellation;
+	}
+
+	/**
+	 * Sets the reason of consultation cancellation
+	 * @param reasonCancellation 
+	 */
+	public void setReasonCancellation(ReasonCancellation reasonCancellation) {
+		this.reasonCancellation = reasonCancellation;
 	}
 	
 }
