@@ -17,6 +17,14 @@ public interface ConsultationService {
 	public Consultation addConsultation(ConsultationDTO consultationDTO) throws ConsultationValidationException;
 	
 	/**
+   	* Finds a stored consultation by id.
+   	* 
+   	* @param id A long representing the consultation's unique identifier
+   	* @return The corresponding consultation if successful, or null if it is non-existent.
+   	*/
+	public Consultation findConsultationById(Long id);
+	
+	/**
 	 * Cancels and updates an existing query in the repository
 	 * @param consultationCanceledDTO A data transfer object representing the consultation that will be canceled.
 	* @return The canceled consultation if successful,  or throws an exception if there is an error.

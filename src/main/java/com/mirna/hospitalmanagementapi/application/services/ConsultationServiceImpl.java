@@ -100,19 +100,32 @@ public class ConsultationServiceImpl implements ConsultationService {
 	}
 
 	/**
+   	* Finds a stored consultation by id.
+   	* 
+   	* @param id A long representing the consultation's unique identifier
+   	* @return The corresponding consultation if successful, or throws an exception if it is non-existent.
+   	*/
+	@Override
+	public Consultation findConsultationById(Long id) {
+		Consultation consultation = findConsultationById.execute(id);
+
+		if (consultation == null)
+			throw new EntityNotFoundException("No existing consultation with this id");
+		
+		return consultation;
+	}
+	
+	/**
 	 * Cancels and updates an existing query in the repository
 	 * @param consultationCanceledDTO A data transfer object representing the consultation that will be canceled.
 	* @return The canceled consultation if successful,  or throws an exception if there is an error.
 	 */
 	@Override
 	public Consultation cancelConsultation(ConsultationCanceledDTO consultationCanceledDTO) {
-		Consultation consultation = findConsultationById.execute(consultationCanceledDTO.consultationId());
-
-		if (consultation == null)
-			throw new EntityNotFoundException("No existing consultation with this id");
+		Consultation consultation = this.findConsultationById(consultationCanceledDTO.consultationId());
 
 		consultation.setCanceled(true);
-		consultation.setReasonCancellation(consultationCanceledDTO.reasonCancellation()); // not working (yet)
+		consultation.setReasonCancellation(consultationCanceledDTO.reasonCancellation());
 
 		return saveConsultation.execute(consultation);
 	}
