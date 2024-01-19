@@ -22,7 +22,7 @@ Hospital Management API built in Spring Boot
 
 ## API Documentation - /swagger-ui/index.html
 
-### /auth
+### authentication
 
 #### POST - [**/api/auth/register**] - Register a new user
 
@@ -60,7 +60,7 @@ Hospital Management API built in Spring Boot
 | `403` | _Incorrect credentials_ | 
 
 
-### /doctors
+### doctors
 
 #### POST - [**/api/v1.0/doctors**] - Adds a new doctor
 
@@ -297,7 +297,7 @@ Hospital Management API built in Spring Boot
 | `404` | _Entity not found_ |
 | `403` | _Unauthorized / Invalid token_ | 
 
-### /patients
+### patients
 
 #### POST - [**/api/v1.0/patients**] - Adds a new patient
 
@@ -527,7 +527,7 @@ Hospital Management API built in Spring Boot
 | `404` | _Entity not found_ |
 | `403` | _Unauthorized / Invalid token_ | 
 
-### /consultations
+### consultations
 
 #### POST - [**/api/v1.0/consultations**] - Adds a new consultation
 
