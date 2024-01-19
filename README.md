@@ -555,3 +555,61 @@ Hospital Management API built in Spring Boot
 | `400` | _Validation Error_ |
 | `403` | _Unauthorized / Invalid token_ | 
 | `404` | _Entity not found_ |
+
+#### GET - [**/api/v1.0/consultations/{id}**] - Get an existing consultation
+
+- **Response Body Example:**
+```
+{
+    "id": 1,
+    "consultationDate": "22/04/2024 10:34",
+    "patient": {...},
+    "doctor": {...},
+    "canceled": false,
+    "reasonCancellation: ""
+}
+```
+
+- **Request Headers:**
+
+| Key  | Description |
+| ------------- | ------------- |
+| `Authorization` | _Authorization token_ |
+
+- **Request Parameters:**
+
+| Key  | Description |
+| ------------- | ------------- |
+| `id` | _Unique identifier of the consultation that will be fetched_ |
+
+- **Responses:**
+
+| Code  | Description |
+| ------------- | ------------- |
+| `200` | _Successful operation_ |
+| `404` | _Entity not found_ |
+| `403` | _Unauthorized / Invalid token_ | 
+
+#### DELETE - [**/api/v1.0/consultations**] - Cancels a scheduled consultation
+
+- **Body:**
+```
+{   
+    "consultationId" (number, required),  
+    "reasonCancellation" (string, required),  
+}
+```
+
+- **Request Headers:**
+
+| Key  | Description |
+| ------------- | ------------- |
+| `Authorization` | _Authorization token_ |
+
+- **Responses:**
+
+| Code  | Description |
+| ------------- | ------------- |
+| `200` | _Successful operation_ |
+| `403` | _Unauthorized / Invalid token_ | 
+| `404` | _Entity not found_ |
