@@ -28,6 +28,7 @@ import com.mirna.hospitalmanagementapi.domain.entities.Doctor;
 import com.mirna.hospitalmanagementapi.domain.entities.Patient;
 import com.mirna.hospitalmanagementapi.domain.services.DoctorService;
 
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 
 /**
@@ -38,6 +39,7 @@ import jakarta.validation.Valid;
  */
 @RestController
 @RequestMapping("/api/v1.0/doctors")
+@SecurityRequirement(name = "bearer-key")
 public class DoctorController {
 
 	@Autowired

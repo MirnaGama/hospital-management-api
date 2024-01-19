@@ -24,6 +24,7 @@ import com.mirna.hospitalmanagementapi.domain.dtos.patient.PatientUpdatedDataDTO
 import com.mirna.hospitalmanagementapi.domain.entities.Patient;
 import com.mirna.hospitalmanagementapi.domain.services.PatientService;
 
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 
 /**
@@ -34,6 +35,7 @@ import jakarta.validation.Valid;
  */
 @RestController
 @RequestMapping("/api/v1.0/patients")
+@SecurityRequirement(name = "bearer-key")
 public class PatientController {
 
 	@Autowired
