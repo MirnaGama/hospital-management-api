@@ -551,7 +551,7 @@ Hospital Management API built in Spring Boot
 
 | Code  | Description |
 | ------------- | ------------- |
-| `200` | _Successful operation |
+| `201` | _Successfully created_ |
 | `400` | _Validation Error_ |
 | `403` | _Unauthorized / Invalid token_ | 
 | `404` | _Entity not found_ |
