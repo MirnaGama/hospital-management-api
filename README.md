@@ -20,7 +20,7 @@ Hospital Management API built in Spring Boot
 - [X] R9 - Consultation Scheduling
 - [ ] R10 - Consultation Cancellation
 
-## API Documentation
+## API Documentation - /swagger-ui/index.html
 
 ### /auth
 
