@@ -21,6 +21,7 @@ import com.mirna.hospitalmanagementapi.domain.entities.Consultation;
 import com.mirna.hospitalmanagementapi.domain.exceptions.ConsultationValidationException;
 import com.mirna.hospitalmanagementapi.domain.services.ConsultationService;
 
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 
 /**
@@ -31,6 +32,7 @@ import jakarta.validation.Valid;
  */
 @RestController
 @RequestMapping("/api/v1.0/consultations")
+@SecurityRequirement(name = "bearer-key")
 public class ConsultationController {
 
 	@Autowired
