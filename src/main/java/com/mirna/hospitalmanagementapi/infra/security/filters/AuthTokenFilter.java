@@ -1,6 +1,7 @@
 package com.mirna.hospitalmanagementapi.infra.security.filters;
 
 import java.io.IOException;
+import java.util.stream.Stream;
 
 import javax.security.sasl.AuthenticationException;
 
@@ -54,7 +55,14 @@ public class AuthTokenFilter extends OncePerRequestFilter {
 	
 	@Override
 	protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
-	    return request.getServletPath().startsWith("/api/auth");
-	}
+		String url = request.getRequestURI();
+	    return Stream.of(excluded_urls).anyMatch(x -> url.startsWith(x));
+	 }
+	
+	private static final String[] excluded_urls = {
+			"/api/auth",
+			"/v3/api-docs",
+			"/swagger-ui"
+    };
 
 }
