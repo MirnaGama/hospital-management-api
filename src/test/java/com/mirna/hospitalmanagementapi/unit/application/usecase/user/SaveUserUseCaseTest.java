@@ -46,7 +46,7 @@ public class SaveUserUseCaseTest {
 	@DisplayName("Should execute save method")
 	public void testSaveUser() throws Exception {
 		
-		User user = new User(new UserDTO("test", "password"));
+		User user = new User(new UserDTO("testSavedUser", "password"));
 		
 		user = (User) saveUser.execute(user);
 		
