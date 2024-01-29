@@ -47,7 +47,7 @@ public class UserServiceTest {
 	@Test
 	@DisplayName("Should add valid user")
 	public void testAddValidUser() {
-		UserDTO userDTO = new UserDTO("test", "password");
+		UserDTO userDTO = new UserDTO("testUser", "password");
 		
 		User user = userService.addUser(userDTO);
 		
