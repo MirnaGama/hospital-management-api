@@ -8,6 +8,24 @@ Hospital Management API built in Spring Boot
 - JDK 17
 - Maven 4.0.0
 
+### Running the application
+1. `git clone https://github.com/MirnaGama/hospital-management-api/`
+2. `cd hospital-management-api`
+3. `mvn clean install`<br>
+It will build the jar file in the target folder
+4. `mvn spring-boot:run`<br>
+It will compile and run the application on default port (8080)
+
+### Running tests
+- `mvn test`<br>
+It will executes all the tests.
+
+- `mvn -Dtest=packageName.className test`<br>
+It will execute only one test class
+
+- `mvn -Dtest=packageName.className#methodName test`<br>
+It will run only one test method from one test class
+
 ### Features
 - [X] R1 - Doctor Registration
 - [X] R2 - List of Doctors
