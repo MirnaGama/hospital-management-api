@@ -26,7 +26,7 @@ It will execute only one test class
 - `mvn -Dtest=packageName.className#methodName test`<br>
 It will run only one test method from one test class
 
-### Features
+### Features - v1.0
 - [X] R1 - Doctor Registration
 - [X] R2 - List of Doctors
 - [X] R3 - Doctor Update
